@@ -2,28 +2,40 @@ import { Request, Response } from 'express';
 import Post from '../models/Post';
 import calcReadingTime from '../utils/readingTimeCalculator';
 import { blogSchema, updateBlogSchema } from '../utils/validator';
+import postQueue from '../utils/postQueue';
+import User from '../models/User';
 
-export const createPost = async (req: Request, res: Response): Promise<void> => {
+export const createBlog = async (req: Request, res: Response): Promise<void> => {
     try {
         const { error, value } = blogSchema.validate(req.body);
-        console.log(error, value);
         if (error) {
             res.status(400).json({ error: error.details[0].message });
             return;
         }
 
-        const { title, description, tags, body } = value;
+        const { title, description, tags, body, scheduledFor } = value;
 
         const reading_time = calcReadingTime(body);
 
         const blog = new Post({
             title,
             description,
-            tags: tags.split(','),
+            tags: tags ? tags.split(',') : [],
             body,
             author: req.userId,
-            reading_time
+            reading_time,
+            scheduledFor: scheduledFor ? new Date(scheduledFor) : undefined
         });
+
+        if (scheduledFor) {
+            const delay = new Date(scheduledFor).getTime() - Date.now();
+            if (delay <= 0) {
+                res.status(400).json({ error: 'Posts must be scheduled for a future time.' });
+                return;
+            }
+            const job = await postQueue.add({ postId: blog._id }, { delay });
+            blog.scheduledJobId = String(job.id);
+        }
 
         await blog.save();
         res.status(201).json(blog);
@@ -51,7 +63,21 @@ export const updateBlog = async (req: Request, res: Response): Promise<void> => 
             res.status(404).json({ error: 'This post could not be found.' });
             return;
         }
-        
+
+
+        if (updates.scheduledFor) {
+            const delay = new Date(updates.scheduledFor).getTime() - Date.now();
+            if (delay <= 0) {
+                res.status(400).json({ error: 'Posts must be scheduled for a future time.' });
+                return;
+            }
+            if (post.scheduledJobId) {
+                const prevJob = await postQueue.getJob(post.scheduledJobId);
+                if (prevJob) await prevJob.remove();
+            }
+            const job = await postQueue.add({ postId: post._id }, { delay });
+            updates.scheduledJobId = String(job.id);
+        }
 
         if (updates.body) {
             updates.reading_time = calcReadingTime(updates.body);
@@ -59,7 +85,7 @@ export const updateBlog = async (req: Request, res: Response): Promise<void> => 
 
         Object.assign(post, updates);
         await post.save();
-        
+
         res.json(post);
     } catch (e) {
         res.status(500).json({ error: (e as Error).message });
@@ -97,7 +123,7 @@ export const deleteBlog = async (req: Request, res: Response): Promise<void> => 
         const { id } = req.params;
 
         const post = await Post.findOneAndDelete({ _id: id, author: req.userId });
-        
+
         if (!post) {
             res.status(404).json({ error: 'This post could not be found.' });
             return;
@@ -155,12 +181,10 @@ export const getPublishedBlogs = async (req: Request, res: Response): Promise<vo
         const filter: Record<string, any> = { state: 'published' };
 
         if (author) {
-            const User = require('../models/User');
             const authorUser = await User.findOne({
                 username: new RegExp(author as string, 'i')
             });
-            console.log(authorUser);
-            
+
             if (authorUser) {
                 filter.author = authorUser._id
             } else {
@@ -169,6 +193,7 @@ export const getPublishedBlogs = async (req: Request, res: Response): Promise<vo
                     "totalPages": 0,
                     "currentPage": 1
                 });
+                return;
             };
         }
 
@@ -207,7 +232,7 @@ export const getBlogById = async (req: Request, res: Response): Promise<void> =>
 
         const post = await Post.findOne({ _id: id, state: 'published' })
             .populate('author', 'first_name last_name email');
-        
+
         if (!post) {
             res.status(404).json({ error: 'This post could not be found.' });
             return;
