@@ -28,7 +28,7 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
             await user.save();
         } catch (e) {
             if ((e as any).code === 11000) {
-                res.status(400).json({ error: "This email is already in us(e as Error)." });
+                res.status(400).json({ error: "This email is already in use." });
                 return;
             }
             throw e;

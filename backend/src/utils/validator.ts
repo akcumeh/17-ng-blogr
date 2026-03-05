@@ -17,14 +17,16 @@ const blogSchema = Joi.object({
     title: Joi.string().min(3),
     description: Joi.string().allow(''),
     tags: Joi.string().min(2),
-    body: Joi.string().required()
+    body: Joi.string().required(),
+    scheduledFor: Joi.string().isoDate().optional()
 });
 
 const updateBlogSchema = Joi.object({
     title: Joi.string().min(3),
     description: Joi.string().allow(''),
     tags: Joi.string().min(2),
-    body: Joi.string().required()
+    body: Joi.string(),
+    scheduledFor: Joi.string().isoDate().optional()
 }).min(1);
 
 export {

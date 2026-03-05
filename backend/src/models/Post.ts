@@ -4,6 +4,8 @@ export interface IPost extends Document {
     title: string;
     description?: string;
     author: Types.ObjectId;
+    scheduledFor?: Date;
+    scheduledJobId?: string;
     state: 'draft' | 'published';
     read_count: number;
     reading_time?: number;
@@ -23,6 +25,8 @@ const postSchema = new Schema<IPost>({
         ref: 'User',
         required: true
     },
+    scheduledFor: { type: Date },
+    scheduledJobId: { type: String },
     state: {
         type: String,
         enum: ['draft', 'published'],

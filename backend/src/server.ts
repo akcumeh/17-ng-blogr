@@ -1,4 +1,4 @@
-require('dotenv').config();
+import 'dotenv/config';
 import express from 'express';
 import connectDB from './config/db';
 import authRoutes from './routes/authRoutes';
