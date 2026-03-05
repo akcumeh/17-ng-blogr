@@ -1,0 +1,57 @@
+$color-red-500: hsl(356, 100%, 66%);
+$color-red-400: hsl(355, 100%, 74%);
+$color-blue-900: hsl(208, 49%, 24%);
+
+$color-white: hsl(0, 100%, 100%);
+$color-gray-100: hsl(0, 0%, 96%);
+$color-gray-200: hsl(0, 0%, 90%);
+$color-gray-600: hsl(207, 13%, 34%);
+$color-gray-900: hsl(240, 10%, 16%);
+
+$gradient-intro-orange: hsl(13, 100%, 72%);
+$gradient-intro-red: hsl(353, 100%, 62%);
+
+$gradient-body-purple-950: hsl(237, 17%, 21%);
+$gradient-body-purple-900: hsl(237, 23%, 31%);
+
+$font-family-overpass: 'Overpass', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+$font-family-ubuntu: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+$font-size-base: 1rem;
+$font-size-h1: 3.5rem;
+$font-size-h1-mobile: 2.25rem;
+$font-size-h2: 2.5rem;
+$font-size-h3: 1.75rem;
+$font-size-sm: 0.875rem;
+$font-size-lg: 1.125rem;
+
+$font-weight-overpass-light: 300;
+$font-weight-overpass-semibold: 600;
+$font-weight-ubuntu-regular: 400;
+$font-weight-ubuntu-medium: 500;
+$font-weight-ubuntu-bold: 700;
+
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+$spacing-2xl: 3rem;
+$spacing-3xl: 4rem;
+$spacing-4xl: 5rem;
+$spacing-5xl: 6rem;
+
+$breakpoint-mobile: 23.4375rem;
+$breakpoint-tablet: 48rem;
+$breakpoint-desktop: 90rem;
+
+$radius-sm: 0.25rem;
+$radius-md: 0.5rem;
+$radius-lg: 1rem;
+$radius-xl: 6rem;
+$radius-full: 50rem;
+
+$z-index-dropdown: 10;
+$z-index-header: 100;
+$z-index-mobile-menu: 1000;
+$z-index-modal: 2000;

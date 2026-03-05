@@ -1,0 +1,23 @@
+/* Global Styles
+ * Import order matters:
+ * 1. Tokens - everything depends on these
+ * 2. Reset - establish baseline
+ * 3. Typography - depends on tokens
+ * 4. Mixins - utilities for components
+ * 5. Utilities - template classes
+ */
+
+// 1. Tokens first - everything else depends on these
+@use 'styles/tokens';
+
+// 2. Reset - establish baseline styles
+@use 'styles/reset';
+
+// 3. Typography - depends on tokens
+@use 'styles/typography';
+
+// 4. Mixins - utilities for components to use
+@use 'styles/mixins';
+
+// 5. Utilities - can be used in templates
+@use 'styles/utilities';
