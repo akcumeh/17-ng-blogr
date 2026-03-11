@@ -1,0 +1,157 @@
+@use '../../../../styles/tokens';
+@use '../../../../styles/mixins';
+
+.mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: tokens.$z-index-modal;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: tokens.$spacing-2xl tokens.$spacing-md;
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        background: hsla(0, 0%, 0%, 0.5);
+        z-index: 1;
+    }
+
+    &__content {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 20.5rem;
+        background: tokens.$color-white;
+        border-radius: tokens.$radius-md;
+        padding: tokens.$spacing-xl tokens.$spacing-lg;
+        margin-top: 5rem;
+        box-shadow: 0 1.25rem 2.5rem hsla(0, 0%, 0%, 0.15);
+    }
+
+    &__close {
+        position: absolute;
+        top: tokens.$spacing-lg;
+        right: tokens.$spacing-lg;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: tokens.$spacing-sm;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        &:focus-visible {
+            outline: 2px solid tokens.$color-blue-900;
+            outline-offset: 2px;
+            border-radius: tokens.$radius-sm;
+        }
+    }
+
+    &__nav {
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-md;
+        margin-bottom: tokens.$spacing-xl;
+    }
+
+    &__group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__trigger {
+        font-family: tokens.$font-family-ubuntu;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        font-size: tokens.$font-size-lg;
+        color: tokens.$color-blue-900;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: tokens.$spacing-md 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: tokens.$spacing-sm;
+        @include mixins.smooth-transition();
+
+        &:focus-visible {
+            outline: 2px solid tokens.$color-blue-900;
+            outline-offset: 2px;
+            border-radius: tokens.$radius-sm;
+        }
+    }
+
+    &__arrow {
+        width: 0.625rem;
+        height: auto;
+        @include mixins.smooth-transition();
+
+        &--open {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__dropdown {
+        background: tokens.$color-gray-100;
+        border-radius: tokens.$radius-md;
+        padding: tokens.$spacing-lg;
+        margin-top: tokens.$spacing-sm;
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-sm;
+    }
+
+    &__item {
+        font-family: tokens.$font-family-overpass;
+        font-weight: tokens.$font-weight-overpass-semibold;
+        font-size: tokens.$font-size-base;
+        color: tokens.$color-gray-600;
+        text-decoration: none;
+        padding: tokens.$spacing-sm 0;
+        @include mixins.smooth-transition();
+
+        &:hover {
+            color: tokens.$color-blue-900;
+        }
+
+        &:focus-visible {
+            outline: 2px solid tokens.$color-blue-900;
+            outline-offset: 2px;
+            border-radius: tokens.$radius-sm;
+        }
+    }
+
+    &__footer {
+        border-top: 1px solid tokens.$color-gray-200;
+        padding-top: tokens.$spacing-xl;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: tokens.$spacing-lg;
+    }
+
+    &__login {
+        font-family: tokens.$font-family-ubuntu;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        font-size: tokens.$font-size-lg;
+        color: tokens.$color-blue-900;
+        text-decoration: none;
+        @include mixins.smooth-transition();
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &:focus-visible {
+            outline: 2px solid tokens.$color-blue-900;
+            outline-offset: 2px;
+            border-radius: tokens.$radius-sm;
+        }
+    }
+}

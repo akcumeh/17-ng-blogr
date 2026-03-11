@@ -1,0 +1,68 @@
+@use '../../../../styles/tokens';
+@use '../../../../styles/mixins';
+
+.btn {
+    font-family: tokens.$font-family-ubuntu;
+    font-weight: tokens.$font-weight-ubuntu-bold;
+    border-radius: tokens.$radius-full;
+    cursor: pointer;
+    border: none;
+    @include mixins.smooth-transition();
+
+    &:focus-visible {
+        outline: 2px solid tokens.$color-white;
+        outline-offset: 2px;
+    }
+
+    &--primary {
+        background: tokens.$color-white;
+        color: tokens.$color-red-500;
+
+        &:hover:not(.btn--disabled) {
+            background: tokens.$color-red-400;
+            color: tokens.$color-white;
+        }
+    }
+
+    &--secondary {
+        background: transparent;
+        border: 1px solid tokens.$color-white;
+        color: tokens.$color-white;
+
+        &:hover:not(.btn--disabled) {
+            background: tokens.$color-white;
+            color: tokens.$color-red-500;
+        }
+    }
+
+    &--ghost {
+        background: transparent;
+        color: tokens.$color-gray-600;
+
+        &:hover:not(.btn--disabled) {
+            color: tokens.$color-blue-900;
+            text-decoration: underline;
+        }
+    }
+
+    &--sm {
+        padding: tokens.$spacing-sm tokens.$spacing-lg;
+        font-size: tokens.$font-size-sm;
+    }
+
+    &--md {
+        padding: tokens.$spacing-md tokens.$spacing-xl;
+        font-size: tokens.$font-size-base;
+    }
+
+    &--lg {
+        padding: tokens.$spacing-lg tokens.$spacing-2xl;
+        font-size: tokens.$font-size-lg;
+    }
+
+    &--disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}

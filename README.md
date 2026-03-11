@@ -4,6 +4,9 @@ A simple, intuitive blog site, inspired by a Frontend Mentor challenge (https://
 ## `backend/`: Blogr API
 See detailed [Postman docs](https://documenter.getpostman.com/view/38823654/2sBXcKCdXa).
 
+## `frontend/`: Blogr
+See detailed docs at [`frontend/README.md`](./frontend/README.md)
+
 ## Resources
 - [_Using queues in a web app_](https://www.freecodecamp.org/news/how-to-use-queues-in-web-applications/) by [Zubair](https://github.com/Zubs)
 - [BEM](https://getbem.com/introduction/) for SCSS

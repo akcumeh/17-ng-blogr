@@ -1,0 +1,56 @@
+@if (isOpen()) {
+    <div class="mobile-menu" role="dialog" aria-modal="true">
+        <div class="mobile-menu__overlay" (click)="handleClose()"></div>
+
+        <div class="mobile-menu__content">
+            <button
+                class="mobile-menu__close"
+                (click)="handleClose()"
+                aria-label="Close menu"
+            >
+                <img src="assets/images/icon-close.svg" alt="" />
+            </button>
+
+            <nav class="mobile-menu__nav">
+                @for (group of navGroups(); track group.label) {
+                    <div class="mobile-menu__group">
+                        <button
+                            class="mobile-menu__trigger"
+                            [attr.aria-expanded]="isDropdownOpen(group.label)"
+                            (click)="toggleDropdown(group.label)"
+                        >
+                            {{ group.label }}
+                            <img
+                                [src]="isDropdownOpen(group.label) ? 'assets/images/icon-arrow-light.svg' : 'assets/images/icon-arrow-dark.svg'"
+                                alt=""
+                                [ngClass]="{'mobile-menu__arrow--open': isDropdownOpen(group.label)}"
+                                class="mobile-menu__arrow"
+                            />
+                        </button>
+
+                        @if (isDropdownOpen(group.label)) {
+                            <div class="mobile-menu__dropdown">
+                                @for (item of group.items; track item.href) {
+                                    <a
+                                        [href]="item.href"
+                                        class="mobile-menu__item"
+                                        (click)="handleClose()"
+                                    >
+                                        {{ item.label }}
+                                    </a>
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+            </nav>
+
+            <div class="mobile-menu__footer">
+                <a href="#" class="mobile-menu__login">Login</a>
+                <app-button variant="primary" size="md">
+                    Sign Up
+                </app-button>
+            </div>
+        </div>
+    </div>
+}
