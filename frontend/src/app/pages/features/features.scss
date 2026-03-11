@@ -1,0 +1,336 @@
+@use '../../../styles/tokens';
+@use '../../../styles/mixins';
+
+.feature-one {
+    padding: tokens.$spacing-4xl tokens.$spacing-lg tokens.$spacing-3xl;
+    overflow: hidden;
+
+    @include mixins.breakpoint('tablet') {
+        padding: tokens.$spacing-4xl tokens.$spacing-2xl tokens.$spacing-3xl;
+    }
+
+    @include mixins.breakpoint('desktop') {
+        padding: tokens.$spacing-5xl 0;
+    }
+
+    &__heading {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-h2;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        color: tokens.$color-blue-900;
+        text-align: center;
+        margin-bottom: tokens.$spacing-3xl;
+
+        @include mixins.breakpoint('desktop') {
+            margin-bottom: tokens.$spacing-4xl;
+        }
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-3xl;
+
+        @include mixins.breakpoint('desktop') {
+            max-width: 75rem;
+            margin-inline: auto;
+            flex-direction: row;
+            align-items: center;
+            gap: 0;
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-2xl;
+        text-align: center;
+
+        @include mixins.breakpoint('desktop') {
+            flex: 1;
+            text-align: left;
+            padding-right: tokens.$spacing-4xl;
+        }
+    }
+
+    &__article {
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-md;
+    }
+
+    &__title {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-h3;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        color: tokens.$color-blue-900;
+    }
+
+    &__text {
+        font-family: tokens.$font-family-overpass;
+        font-size: tokens.$font-size-base;
+        font-weight: tokens.$font-weight-overpass-light;
+        color: tokens.$color-gray-600;
+        line-height: 1.75;
+    }
+
+    &__image {
+        position: relative;
+        display: flex;
+        justify-content: center;
+
+        @include mixins.breakpoint('desktop') {
+            flex: 1;
+            min-width: 50%;
+        }
+    }
+
+    &__img {
+        width: 100%;
+        height: auto;
+
+        @include mixins.breakpoint('tablet') {
+            width: 80%;
+            margin-inline: auto;
+        }
+
+        &--mobile {
+            display: block;
+
+            @include mixins.breakpoint('desktop') {
+                display: none;
+            }
+        }
+
+        &--desktop {
+            display: none;
+
+            @include mixins.breakpoint('desktop') {
+                display: block;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 125%;
+                max-width: none;
+                height: auto;
+            }
+        }
+    }
+}
+
+.feature-two {
+    position: relative;
+    background: linear-gradient(
+        135deg,
+        tokens.$gradient-body-purple-950,
+        tokens.$gradient-body-purple-900
+    );
+    border-top-right-radius: tokens.$radius-xl;
+    border-bottom-left-radius: tokens.$radius-xl;
+    padding: 0 tokens.$spacing-lg tokens.$spacing-3xl;
+    margin-top: tokens.$spacing-5xl;
+    overflow: visible;
+    height: max-content;
+
+    @include mixins.breakpoint('tablet') {
+        padding: 0 tokens.$spacing-2xl tokens.$spacing-4xl;
+    }
+
+    @include mixins.breakpoint('desktop') {
+        border-top-right-radius: 6.25rem;
+        border-bottom-left-radius: 6.25rem;
+        padding: 0;
+        margin-top: 7rem;
+        overflow: hidden;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: url('/assets/images/bg-pattern-circles.svg');
+        background-position: center top -12rem;
+        background-repeat: no-repeat;
+        background-size: 37.5rem;
+        z-index: 0;
+
+        @include mixins.breakpoint('desktop') {
+            background-position: left -13rem center;
+            background-size: 62rem;
+        }
+    }
+
+    &__container {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: tokens.$spacing-2xl;
+        padding-top: 15rem;
+
+        @include mixins.breakpoint('desktop') {
+            max-width: 75rem;
+            margin-inline: auto;
+            flex-direction: row;
+            align-items: center;
+            gap: tokens.$spacing-4xl;
+            padding: tokens.$spacing-4xl 0;
+        }
+    }
+
+    &__image {
+        display: flex;
+        justify-content: center;
+        margin-top: -15rem;
+
+        @include mixins.breakpoint('desktop') {
+            flex: 1;
+            margin-top: 0;
+        }
+    }
+
+    &__img {
+        width: 100%;
+        max-width: 24rem;
+        height: auto;
+
+        @include mixins.breakpoint('desktop') {
+            max-width: 35rem;
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-lg;
+        text-align: center;
+
+        @include mixins.breakpoint('desktop') {
+            flex: 1;
+            text-align: left;
+        }
+    }
+
+    &__heading {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-h2;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        color: tokens.$color-white;
+    }
+
+    &__text {
+        font-family: tokens.$font-family-overpass;
+        font-size: tokens.$font-size-base;
+        font-weight: tokens.$font-weight-overpass-light;
+        color: tokens.$color-white;
+        line-height: 1.75;
+        opacity: 0.9;
+    }
+}
+
+.feature-three {
+    padding: tokens.$spacing-4xl tokens.$spacing-lg tokens.$spacing-5xl;
+    overflow: hidden;
+
+    @include mixins.breakpoint('tablet') {
+        padding: tokens.$spacing-4xl tokens.$spacing-2xl tokens.$spacing-5xl;
+    }
+
+    @include mixins.breakpoint('desktop') {
+        padding: tokens.$spacing-5xl 0;
+    }
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-3xl;
+
+        @include mixins.breakpoint('desktop') {
+            max-width: 75rem;
+            margin-inline: auto;
+            flex-direction: row-reverse;
+            align-items: center;
+            gap: 0;
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-2xl;
+        text-align: center;
+
+        @include mixins.breakpoint('desktop') {
+            flex: 1;
+            text-align: left;
+            padding-left: tokens.$spacing-4xl;
+        }
+    }
+
+    &__article {
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-md;
+    }
+
+    &__title {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-h3;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        color: tokens.$color-blue-900;
+    }
+
+    &__text {
+        font-family: tokens.$font-family-overpass;
+        font-size: tokens.$font-size-base;
+        font-weight: tokens.$font-weight-overpass-light;
+        color: tokens.$color-gray-600;
+        line-height: 1.75;
+    }
+
+    &__image {
+        position: relative;
+        display: flex;
+        justify-content: center;
+
+        @include mixins.breakpoint('desktop') {
+            flex: 1;
+            min-width: 50%;
+        }
+    }
+
+    &__img {
+        width: 100%;
+        height: auto;
+
+        @include mixins.breakpoint('tablet') {
+            width: 80%;
+            margin-inline: auto;
+        }
+
+        &--mobile {
+            display: block;
+
+            @include mixins.breakpoint('desktop') {
+                display: none;
+            }
+        }
+
+        &--desktop {
+            display: none;
+
+            @include mixins.breakpoint('desktop') {
+                display: block;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 125%;
+                max-width: none;
+                height: auto;
+            }
+        }
+    }
+}

@@ -3,14 +3,6 @@
         <div class="mobile-menu__overlay" (click)="handleClose()"></div>
 
         <div class="mobile-menu__content">
-            <button
-                class="mobile-menu__close"
-                (click)="handleClose()"
-                aria-label="Close menu"
-            >
-                <img src="assets/images/icon-close.svg" alt="" />
-            </button>
-
             <nav class="mobile-menu__nav">
                 @for (group of navGroups(); track group.label) {
                     <div class="mobile-menu__group">
@@ -21,33 +13,34 @@
                         >
                             {{ group.label }}
                             <img
-                                [src]="isDropdownOpen(group.label) ? 'assets/images/icon-arrow-light.svg' : 'assets/images/icon-arrow-dark.svg'"
+                                src="assets/images/icon-arrow-dark.svg"
                                 alt=""
-                                [ngClass]="{'mobile-menu__arrow--open': isDropdownOpen(group.label)}"
                                 class="mobile-menu__arrow"
+                                [class.mobile-menu__arrow--open]="isDropdownOpen(group.label)"
                             />
                         </button>
 
-                        @if (isDropdownOpen(group.label)) {
-                            <div class="mobile-menu__dropdown">
-                                @for (item of group.items; track item.href) {
-                                    <a
-                                        [href]="item.href"
-                                        class="mobile-menu__item"
-                                        (click)="handleClose()"
-                                    >
-                                        {{ item.label }}
-                                    </a>
-                                }
-                            </div>
-                        }
+                        <div
+                            class="mobile-menu__dropdown"
+                            [class.mobile-menu__dropdown--open]="isDropdownOpen(group.label)"
+                        >
+                            @for (item of group.items; track item.href) {
+                                <a
+                                    [href]="item.href"
+                                    class="mobile-menu__item"
+                                    (click)="handleClose()"
+                                >
+                                    {{ item.label }}
+                                </a>
+                            }
+                        </div>
                     </div>
                 }
             </nav>
 
             <div class="mobile-menu__footer">
                 <a href="#" class="mobile-menu__login">Login</a>
-                <app-button variant="primary" size="md">
+                <app-button variant="filled" size="md">
                     Sign Up
                 </app-button>
             </div>

@@ -1,15 +1,14 @@
 import { Component, ChangeDetectionStrategy, input, output, computed } from '@angular/core';
-import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-button',
-  imports: [NgClass],
-  templateUrl: './button.component.html',
-  styleUrl: './button.component.scss',
+  imports: [],
+  templateUrl: './button.html',
+  styleUrl: './button.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent {
-    variant = input<'primary' | 'secondary' | 'ghost'>('primary');
+    variant = input<'primary' | 'secondary' | 'ghost' | 'filled'>('primary');
     size = input<'sm' | 'md' | 'lg'>('md');
     disabled = input<boolean>(false);
     type = input<'button' | 'submit' | 'reset'>('button');

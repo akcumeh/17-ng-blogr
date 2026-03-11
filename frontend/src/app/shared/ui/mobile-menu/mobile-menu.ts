@@ -1,5 +1,4 @@
 import { Component, ChangeDetectionStrategy, input, output, signal } from '@angular/core';
-import { NgClass } from '@angular/common';
 import { ButtonComponent } from '../button/button';
 
 export interface NavGroup {
@@ -14,7 +13,7 @@ export interface NavItem {
 
 @Component({
     selector: 'app-mobile-menu',
-    imports: [NgClass, ButtonComponent],
+    imports: [ButtonComponent],
     templateUrl: './mobile-menu.html',
     styleUrl: './mobile-menu.scss',
     changeDetection: ChangeDetectionStrategy.OnPush

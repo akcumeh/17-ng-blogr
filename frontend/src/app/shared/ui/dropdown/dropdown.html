@@ -1,1 +1,23 @@
-<p>dropdown works!</p>
+<div class="dropdown">
+    <button
+        class="dropdown__trigger"
+        (click)="toggle()"
+        [class.dropdown__trigger--open]="isOpen()"
+        [attr.aria-expanded]="isOpen()"
+    >
+        {{ label() }}
+        <img
+            src="assets/images/icon-arrow-light.svg"
+            alt=""
+            class="dropdown__arrow"
+            [class.dropdown__arrow--open]="isOpen() && !isClosing()"
+        />
+    </button>
+    @if (isOpen()) {
+        <div class="dropdown__menu" [class.dropdown__menu--closing]="isClosing()">
+            @for (item of items(); track item.href) {
+                <a [href]="item.href" class="dropdown__item">{{ item.label }}</a>
+            }
+        </div>
+    }
+</div>

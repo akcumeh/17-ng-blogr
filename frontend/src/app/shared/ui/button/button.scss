@@ -35,13 +35,23 @@
         }
     }
 
-    &--ghost {
-        background: transparent;
-        color: tokens.$color-gray-600;
+    &--filled {
+        background: tokens.$color-red-500;
+        color: tokens.$color-white;
 
         &:hover:not(.btn--disabled) {
-            color: tokens.$color-blue-900;
-            text-decoration: underline;
+            background: tokens.$color-red-400;
+            color: tokens.$color-white;
+        }
+    }
+
+    &--ghost {
+        background: transparent;
+        border: 1px solid transparent;
+        color: tokens.$color-white;
+
+        &:hover:not(.btn--disabled) {
+            border-color: tokens.$color-white;
         }
     }
 

@@ -7,7 +7,7 @@
     },
     "newProjectRoot": "projects",
     "projects": {
-        "frontend": {
+        "blogr-frontend": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -60,10 +60,10 @@
                     "builder": "@angular/build:dev-server",
                     "configurations": {
                         "production": {
-                            "buildTarget": "frontend:build:production"
+                            "buildTarget": "blogr-frontend:build:production"
                         },
                         "development": {
-                            "buildTarget": "frontend:build:development"
+                            "buildTarget": "blogr-frontend:build:development"
                         }
                     },
                     "defaultConfiguration": "development"

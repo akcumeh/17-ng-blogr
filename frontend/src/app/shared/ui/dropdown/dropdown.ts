@@ -1,5 +1,4 @@
-import { Component, ChangeDetectionStrategy, input, signal } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { Component, ChangeDetectionStrategy, input, signal, output } from '@angular/core';
 
 interface NavItem {
     label: string;
@@ -8,7 +7,7 @@ interface NavItem {
 
 @Component({
     selector: 'app-dropdown',
-    imports: [NgClass],
+    imports: [],
     templateUrl: './dropdown.html',
     styleUrl: './dropdown.scss',
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -16,14 +15,32 @@ interface NavItem {
 export class DropdownComponent {
     label = input.required<string>();
     items = input.required<NavItem[]>();
+    opened = output<string>();
 
     protected isOpen = signal(false);
+    protected isClosing = signal(false);
 
     protected toggle(): void {
-        this.isOpen.update(v => !v);
+        if (this.isOpen()) {
+            this.startClosing();
+        } else {
+            this.isOpen.set(true);
+            this.isClosing.set(false);
+            this.opened.emit(this.label());
+        }
     }
 
-    protected close(): void {
-        this.isOpen.set(false);
+    public close(): void {
+        if (this.isOpen() && !this.isClosing()) {
+            this.startClosing();
+        }
+    }
+
+    private startClosing(): void {
+        this.isClosing.set(true);
+        setTimeout(() => {
+            this.isOpen.set(false);
+            this.isClosing.set(false);
+        }, 500);
     }
 }

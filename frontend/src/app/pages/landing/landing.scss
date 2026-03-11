@@ -1,0 +1,308 @@
+@use '../../../styles/tokens';
+@use '../../../styles/mixins';
+
+.header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: tokens.$z-index-header;
+    padding: tokens.$spacing-xl tokens.$spacing-lg;
+    background: linear-gradient(135deg, tokens.$gradient-intro-orange, tokens.$gradient-intro-red);
+
+    @include mixins.breakpoint('tablet') {
+        padding: tokens.$spacing-xl tokens.$spacing-2xl;
+    }
+
+    @include mixins.breakpoint('desktop') {
+        padding: tokens.$spacing-2xl tokens.$spacing-xl;
+    }
+
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: tokens.$spacing-lg;
+        max-width: 75rem;
+        margin-inline: auto;
+
+        @include mixins.breakpoint('desktop') {
+            gap: tokens.$spacing-2xl;
+        }
+    }
+
+    &__logo {
+        display: flex;
+        align-items: center;
+
+        img {
+            height: 2rem;
+            width: auto;
+
+            @include mixins.breakpoint('desktop') {
+                height: 2.5rem;
+            }
+        }
+    }
+
+    &__hamburger {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: tokens.$spacing-sm;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 2rem;
+            height: auto;
+        }
+
+        &:focus-visible {
+            outline: 2px solid tokens.$color-white;
+            outline-offset: 2px;
+            border-radius: tokens.$radius-sm;
+        }
+    }
+
+    &__nav {
+        display: flex;
+        align-items: center;
+        gap: tokens.$spacing-lg;
+        flex: 1;
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: tokens.$spacing-lg;
+    }
+
+    &__welcome {
+        font-family: tokens.$font-family-ubuntu;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        font-size: tokens.$font-size-base;
+        color: tokens.$color-white;
+    }
+
+    &__login {
+        font-family: tokens.$font-family-ubuntu;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        font-size: tokens.$font-size-base;
+        color: tokens.$color-white;
+        text-decoration: none;
+        @include mixins.smooth-transition();
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &:focus-visible {
+            outline: 2px solid tokens.$color-white;
+            outline-offset: 2px;
+            border-radius: tokens.$radius-sm;
+        }
+    }
+}
+
+.hidden-mobile {
+    @media (max-width: calc(tokens.$breakpoint-tablet - 0.0625rem)) {
+        display: none !important;
+    }
+}
+
+.hidden-desktop {
+    @include mixins.breakpoint('tablet') {
+        display: none !important;
+    }
+}
+
+.hero {
+    position: relative;
+    background: linear-gradient(
+        135deg,
+        tokens.$gradient-intro-orange,
+        tokens.$gradient-intro-red
+    );
+    border-bottom-left-radius: tokens.$radius-xl;
+    padding: tokens.$spacing-5xl tokens.$spacing-lg tokens.$spacing-4xl;
+    text-align: center;
+    overflow: hidden;
+
+    @include mixins.breakpoint('tablet') {
+        padding: tokens.$spacing-5xl tokens.$spacing-2xl tokens.$spacing-4xl;
+    }
+
+    @include mixins.breakpoint('desktop') {
+        padding: tokens.$spacing-5xl tokens.$spacing-xl tokens.$spacing-4xl;
+        border-bottom-left-radius: 6.25rem;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: url('/assets/images/bg-pattern-intro-mobile.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: 0;
+
+        @include mixins.breakpoint('desktop') {
+            background-image: url('/assets/images/bg-pattern-intro-desktop.svg');
+        }
+    }
+
+    &__content {
+        position: relative;
+        z-index: 1;
+        max-width: 50rem;
+        margin-inline: auto;
+        animation: page-enter 500ms ease both;
+    }
+
+    &__title {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-h1-mobile;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        line-height: 1.1;
+        color: tokens.$color-white;
+        margin-bottom: tokens.$spacing-md;
+
+        @include mixins.breakpoint('desktop') {
+            font-size: tokens.$font-size-h1;
+            margin-bottom: tokens.$spacing-lg;
+        }
+    }
+
+    &__subtitle {
+        font-family: tokens.$font-family-overpass;
+        font-size: tokens.$font-size-lg;
+        font-weight: tokens.$font-weight-overpass-light;
+        color: tokens.$color-white;
+        margin-bottom: tokens.$spacing-xl;
+        opacity: 0.9;
+
+        @include mixins.breakpoint('desktop') {
+            font-size: 1.25rem;
+            margin-bottom: tokens.$spacing-2xl;
+        }
+    }
+
+    &__cta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: tokens.$spacing-md;
+        flex-wrap: wrap;
+    }
+}
+
+.footer {
+    background: tokens.$color-gray-900;
+    border-top-right-radius: tokens.$radius-xl;
+    padding: tokens.$spacing-4xl tokens.$spacing-md tokens.$spacing-2xl;
+    margin-top: tokens.$spacing-5xl;
+
+    @include mixins.breakpoint('desktop') {
+        border-top-right-radius: 6.25rem;
+        padding: tokens.$spacing-4xl tokens.$spacing-xl;
+    }
+
+    &__container {
+        max-width: 75rem;
+        margin-inline: auto;
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-3xl;
+        text-align: center;
+
+        @include mixins.breakpoint('tablet') {
+            flex-direction: row;
+            justify-content: space-between;
+            text-align: left;
+            gap: tokens.$spacing-2xl;
+        }
+
+        @include mixins.breakpoint('desktop') {
+            gap: tokens.$spacing-4xl;
+        }
+    }
+
+    &__brand {
+        display: flex;
+        justify-content: center;
+
+        @include mixins.breakpoint('tablet') {
+            justify-content: flex-start;
+        }
+    }
+
+    &__logo {
+        height: 2.5rem;
+        width: auto;
+    }
+
+    &__nav {
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-2xl;
+
+        @include mixins.breakpoint('tablet') {
+            flex-direction: row;
+            gap: tokens.$spacing-2xl;
+        }
+
+        @include mixins.breakpoint('desktop') {
+            gap: tokens.$spacing-4xl;
+        }
+    }
+
+    &__column {
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-lg;
+    }
+
+    &__heading {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-base;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        color: tokens.$color-white;
+    }
+
+    &__list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-sm;
+    }
+
+    &__link {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-base;
+        font-weight: tokens.$font-weight-ubuntu-regular;
+        color: tokens.$color-white;
+        text-decoration: none;
+        opacity: 0.75;
+        @include mixins.smooth-transition();
+
+        &:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        &:focus-visible {
+            outline: 2px solid tokens.$color-white;
+            outline-offset: 2px;
+            border-radius: tokens.$radius-sm;
+            opacity: 1;
+        }
+    }
+}
+
+.landing {
+    display: flex;
+    flex-direction: column;
+}
