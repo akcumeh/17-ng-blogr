@@ -1,0 +1,62 @@
+@use 'tokens';
+@use 'mixins';
+
+h1,
+.heading-1 {
+    font-family: tokens.$font-family-ubuntu;
+    font-size: tokens.$font-size-h1-mobile;
+    font-weight: tokens.$font-weight-ubuntu-medium;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: tokens.$color-white;
+
+    @include mixins.breakpoint('desktop') {
+        font-size: tokens.$font-size-h1;
+    }
+}
+
+h2,
+.heading-2 {
+    font-family: tokens.$font-family-ubuntu;
+    font-size: tokens.$font-size-h2;
+    font-weight: tokens.$font-weight-ubuntu-bold;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: tokens.$color-blue-900;
+}
+
+h3,
+.heading-3 {
+    font-family: tokens.$font-family-ubuntu;
+    font-size: tokens.$font-size-h3;
+    font-weight: tokens.$font-weight-ubuntu-medium;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    color: tokens.$color-blue-900;
+}
+
+p,
+.body {
+    font-family: tokens.$font-family-overpass;
+    font-size: tokens.$font-size-base;
+    font-weight: tokens.$font-weight-overpass-light;
+    line-height: 1.75;
+    letter-spacing: -0.01em;
+    color: tokens.$color-gray-600;
+}
+
+.text-light {
+    color: tokens.$color-white;
+}
+
+.text-dark {
+    color: tokens.$color-gray-900;
+}
+
+.text-semibold {
+    font-weight: tokens.$font-weight-overpass-semibold;
+}
+
+.text-bold {
+    font-weight: tokens.$font-weight-ubuntu-bold;
+}

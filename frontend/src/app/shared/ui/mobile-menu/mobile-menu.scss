@@ -1,0 +1,157 @@
+@use '../../../../styles/tokens';
+@use '../../../../styles/mixins';
+
+.mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: tokens.$z-index-modal;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: tokens.$spacing-2xl tokens.$spacing-md;
+
+    &__overlay {
+        position: absolute;
+        inset: 0;
+        background: hsla(0, 0%, 0%, 0.5);
+        z-index: 1;
+    }
+
+    &__content {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 20.5rem;
+        background: tokens.$color-white;
+        border-radius: tokens.$radius-md;
+        padding: tokens.$spacing-xl tokens.$spacing-lg;
+        margin-top: 5rem;
+        box-shadow: 0 1.25rem 2.5rem hsla(0, 0%, 0%, 0.15);
+        animation: mobile-menu-enter 500ms ease;
+    }
+
+    &__nav {
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-md;
+        margin-bottom: tokens.$spacing-xl;
+    }
+
+    &__group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__trigger {
+        font-family: tokens.$font-family-ubuntu;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        font-size: tokens.$font-size-lg;
+        color: tokens.$color-blue-900;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: tokens.$spacing-md 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: tokens.$spacing-sm;
+        @include mixins.smooth-transition();
+
+        &:focus-visible {
+            outline: 2px solid tokens.$color-blue-900;
+            outline-offset: 2px;
+            border-radius: tokens.$radius-sm;
+        }
+    }
+
+    &__arrow {
+        width: 0.625rem;
+        height: auto;
+        @include mixins.page-transition((transform, filter));
+
+        &--open {
+            transform: rotate(180deg);
+            filter: invert(58%) sepia(56%) saturate(472%) hue-rotate(324deg) brightness(102%) contrast(101%);
+        }
+    }
+
+    &__dropdown {
+        background: tokens.$color-gray-100;
+        border-radius: tokens.$radius-md;
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-sm;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 500ms ease, opacity 500ms ease, padding 500ms ease, margin-top 500ms ease;
+        padding: 0 tokens.$spacing-lg;
+        margin-top: 0;
+
+        &--open {
+            max-height: 20rem;
+            opacity: 1;
+            padding: tokens.$spacing-lg;
+            margin-top: tokens.$spacing-sm;
+        }
+    }
+
+    &__item {
+        font-family: tokens.$font-family-overpass;
+        font-weight: tokens.$font-weight-overpass-semibold;
+        font-size: tokens.$font-size-base;
+        color: tokens.$color-gray-600;
+        text-decoration: none;
+        padding: tokens.$spacing-sm 0;
+        @include mixins.smooth-transition();
+
+        &:hover {
+            color: tokens.$color-blue-900;
+        }
+
+        &:focus-visible {
+            outline: 2px solid tokens.$color-blue-900;
+            outline-offset: 2px;
+            border-radius: tokens.$radius-sm;
+        }
+    }
+
+    &__footer {
+        border-top: 1px solid tokens.$color-gray-200;
+        padding-top: tokens.$spacing-xl;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: tokens.$spacing-lg;
+    }
+
+    &__login {
+        font-family: tokens.$font-family-ubuntu;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        font-size: tokens.$font-size-lg;
+        color: tokens.$color-blue-900;
+        text-decoration: none;
+        @include mixins.smooth-transition();
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &:focus-visible {
+            outline: 2px solid tokens.$color-blue-900;
+            outline-offset: 2px;
+            border-radius: tokens.$radius-sm;
+        }
+    }
+}
+
+@keyframes mobile-menu-enter {
+    from {
+        opacity: 0;
+        transform: translateY(-1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

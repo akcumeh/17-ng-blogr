@@ -1,0 +1,48 @@
+@use 'tokens';
+@use 'mixins';
+
+.container {
+    width: 100%;
+    max-width: 75rem;
+    margin-inline: auto;
+    padding-inline: tokens.$spacing-md;
+
+    @include mixins.breakpoint('desktop') {
+        padding-inline: tokens.$spacing-xl;
+    }
+}
+
+.hidden-mobile {
+    @media (max-width: calc(tokens.$breakpoint-tablet - 0.0625rem)) {
+        display: none !important;
+    }
+}
+
+.hidden-desktop {
+    @include mixins.breakpoint('tablet') {
+        display: none !important;
+    }
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+@keyframes page-enter {
+    from {
+        opacity: 0;
+        transform: translateY(1.5rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

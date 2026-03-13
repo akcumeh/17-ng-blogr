@@ -1,0 +1,99 @@
+<header class="header">
+    <div class="header__container">
+        <a href="/" class="header__logo">
+            <img src="assets/images/logo.svg" alt="Blogr" />
+        </a>
+
+        <button
+            class="header__hamburger hidden-desktop"
+            (click)="toggleMobileMenu()"
+            [attr.aria-expanded]="isMobileMenuOpen()"
+            aria-label="Toggle menu"
+        >
+            <img
+                [src]="isMobileMenuOpen() ? 'assets/images/icon-close.svg' : 'assets/images/icon-hamburger.svg'"
+                alt=""
+            />
+        </button>
+
+        <nav class="header__nav hidden-mobile">
+            @for (group of navGroups; track group.label) {
+                <app-dropdown
+                    [label]="group.label"
+                    [items]="group.items"
+                    (opened)="onDropdownOpened($event)"
+                />
+            }
+        </nav>
+
+        <div class="header__actions hidden-mobile">
+            @if (isAuthenticated()) {
+                <span class="header__welcome">
+                    Welcome, {{ currentUser()?.firstName }}!
+                </span>
+                <app-button variant="ghost" size="md" (click)="logout()">
+                    Logout
+                </app-button>
+            } @else {
+                <a routerLink="/login">
+                    <app-button variant="ghost" size="md">
+                        Login
+                    </app-button>
+                </a>
+                <a routerLink="/signup">
+                    <app-button variant="secondary" size="md">
+                        Sign Up
+                    </app-button>
+                </a>
+            }
+        </div>
+    </div>
+</header>
+
+<app-mobile-menu
+    [isOpen]="isMobileMenuOpen()"
+    [navGroups]="navGroups"
+    (closed)="closeMobileMenu()"
+/>
+
+<main class="landing">
+    <section class="hero">
+        <div class="hero__content">
+            <h1 class="hero__title">A modern publishing platform</h1>
+            <p class="hero__subtitle">Grow your audience and build your online brand</p>
+            <div class="hero__cta">
+                <a routerLink="/signup">
+                    <app-button variant="primary" size="lg">
+                        Start for Free
+                    </app-button>
+                </a>
+                <app-button variant="secondary" size="lg" (click)="scrollToFeatures()">
+                    Learn More
+                </app-button>
+            </div>
+        </div>
+    </section>
+
+    <app-features />
+</main>
+
+<footer class="footer">
+    <div class="footer__container">
+        <div class="footer__brand">
+            <img src="assets/images/logo.svg" alt="Blogr" class="footer__logo" />
+        </div>
+
+        <nav class="footer__nav">
+            @for (group of navGroups; track group.label) {
+                <div class="footer__column">
+                    <h4 class="footer__heading">{{ group.label }}</h4>
+                    <ul class="footer__list">
+                        @for (item of group.items; track item.label) {
+                            <li><a [href]="item.href" class="footer__link">{{ item.label }}</a></li>
+                        }
+                    </ul>
+                </div>
+            }
+        </nav>
+    </div>
+</footer>

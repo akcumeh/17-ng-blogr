@@ -1,0 +1,49 @@
+@if (isOpen()) {
+    <div class="mobile-menu" role="dialog" aria-modal="true">
+        <div class="mobile-menu__overlay" (click)="handleClose()"></div>
+
+        <div class="mobile-menu__content">
+            <nav class="mobile-menu__nav">
+                @for (group of navGroups(); track group.label) {
+                    <div class="mobile-menu__group">
+                        <button
+                            class="mobile-menu__trigger"
+                            [attr.aria-expanded]="isDropdownOpen(group.label)"
+                            (click)="toggleDropdown(group.label)"
+                        >
+                            {{ group.label }}
+                            <img
+                                src="assets/images/icon-arrow-dark.svg"
+                                alt=""
+                                class="mobile-menu__arrow"
+                                [class.mobile-menu__arrow--open]="isDropdownOpen(group.label)"
+                            />
+                        </button>
+
+                        <div
+                            class="mobile-menu__dropdown"
+                            [class.mobile-menu__dropdown--open]="isDropdownOpen(group.label)"
+                        >
+                            @for (item of group.items; track item.href) {
+                                <a
+                                    [href]="item.href"
+                                    class="mobile-menu__item"
+                                    (click)="handleClose()"
+                                >
+                                    {{ item.label }}
+                                </a>
+                            }
+                        </div>
+                    </div>
+                }
+            </nav>
+
+            <div class="mobile-menu__footer">
+                <a href="#" class="mobile-menu__login">Login</a>
+                <app-button variant="filled" size="md">
+                    Sign Up
+                </app-button>
+            </div>
+        </div>
+    </div>
+}

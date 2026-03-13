@@ -1,0 +1,85 @@
+@use 'tokens';
+
+
+@mixin breakpoint($size) {
+    @if $size =='tablet' {
+        @media (min-width: tokens.$breakpoint-tablet) {
+            @content;
+        }
+    }
+
+    @else if $size =='desktop' {
+        @media (min-width: tokens.$breakpoint-desktop) {
+            @content;
+        }
+    }
+}
+
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+@mixin gradient-intro {
+    background: linear-gradient(135deg,
+            tokens.$gradient-intro-orange,
+            tokens.$gradient-intro-red );
+}
+
+@mixin gradient-body {
+    background: linear-gradient(135deg,
+            tokens.$gradient-body-purple-950,
+            tokens.$gradient-body-purple-900 );
+}
+
+
+@mixin feature-section-two-column {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: tokens.$spacing-2xl;
+    align-items: center;
+
+    @include breakpoint('desktop') {
+        grid-template-columns: 1fr 1fr;
+        gap: tokens.$spacing-3xl;
+    }
+}
+
+
+
+@mixin visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+
+
+@mixin smooth-transition($properties: all, $duration: 250ms) {
+    transition: $properties $duration ease;
+}
+
+@mixin page-transition($properties: all, $duration: 500ms) {
+    transition: $properties $duration ease;
+}
