@@ -12,14 +12,14 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
             return;
         }
 
-        const { email, first_name, last_name, username, password } = value;
+        const { email, firstName, lastName, username, password } = value;
 
         const hashedPwd = await bcrypt.hash(password, 10);
 
         const user = new User({
             email,
-            first_name,
-            last_name,
+            first_name: firstName,
+            last_name: lastName,
             username,
             password: hashedPwd
         });
@@ -71,5 +71,24 @@ export const signin = async (req: Request, res: Response): Promise<void> => {
     } catch (e) {
         res.status(500).json({ error: (e as Error).message });
         return;
+    }
+};
+
+export const getMe = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const user = await User.findById(req.userId).select('-password');
+        if (!user) {
+            res.status(404).json({ error: 'User not found.' });
+            return;
+        }
+
+        res.json({
+            email: user.email,
+            firstName: user.first_name,
+            lastName: user.last_name,
+            username: user.username
+        });
+    } catch (e) {
+        res.status(500).json({ error: (e as Error).message });
     }
 };

@@ -1,0 +1,196 @@
+<div class="auth-container">
+    <div class="auth-card">
+        <a href="/" class="auth-card__logo">
+            <img src="assets/images/logo.svg" alt="Blogr" />
+        </a>
+
+        <h1 class="auth-card__title">Create your account</h1>
+        <p class="auth-card__subtitle">Join Blogr and start publishing today</p>
+
+        <form class="auth-form" (submit)="handleSubmit($event)" novalidate>
+            <div class="form-group">
+                <label for="firstName" class="form-label">
+                    First name
+                    <span aria-hidden="true">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    [value]="firstName()"
+                    (input)="updateFirstName($event)"
+                    [class.form-input--error]="firstNameError()"
+                    [attr.aria-invalid]="firstNameError() ? 'true' : null"
+                    [attr.aria-describedby]="firstNameError() ? 'first-name-error' : null"
+                    class="form-input"
+                    autocomplete="given-name"
+                    required
+                    [disabled]="isSubmitting()"
+                />
+                @if (firstNameError()) {
+                    <span id="first-name-error" class="form-error" role="alert">
+                        {{ firstNameError() }}
+                    </span>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="lastName" class="form-label">
+                    Last name
+                    <span aria-hidden="true">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    [value]="lastName()"
+                    (input)="updateLastName($event)"
+                    [class.form-input--error]="lastNameError()"
+                    [attr.aria-invalid]="lastNameError() ? 'true' : null"
+                    [attr.aria-describedby]="lastNameError() ? 'last-name-error' : null"
+                    class="form-input"
+                    autocomplete="family-name"
+                    required
+                    [disabled]="isSubmitting()"
+                />
+                @if (lastNameError()) {
+                    <span id="last-name-error" class="form-error" role="alert">
+                        {{ lastNameError() }}
+                    </span>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="username" class="form-label">
+                    Username
+                    <span aria-hidden="true">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    [value]="username()"
+                    (input)="updateUsername($event)"
+                    [class.form-input--error]="usernameError()"
+                    [attr.aria-invalid]="usernameError() ? 'true' : null"
+                    [attr.aria-describedby]="usernameError() ? 'username-error' : null"
+                    class="form-input"
+                    autocomplete="username"
+                    required
+                    [disabled]="isSubmitting()"
+                />
+                @if (usernameError()) {
+                    <span id="username-error" class="form-error" role="alert">
+                        {{ usernameError() }}
+                    </span>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">
+                    Email address
+                    <span aria-hidden="true">*</span>
+                </label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    [value]="email()"
+                    (input)="updateEmail($event)"
+                    [class.form-input--error]="emailError()"
+                    [attr.aria-invalid]="emailError() ? 'true' : null"
+                    [attr.aria-describedby]="emailError() ? 'email-error' : null"
+                    class="form-input"
+                    autocomplete="email"
+                    required
+                    [disabled]="isSubmitting()"
+                />
+                @if (emailError()) {
+                    <span id="email-error" class="form-error" role="alert">
+                        {{ emailError() }}
+                    </span>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label">
+                    Password
+                    <span aria-hidden="true">*</span>
+                </label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    [value]="password()"
+                    (input)="updatePassword($event)"
+                    [class.form-input--error]="passwordError()"
+                    [attr.aria-invalid]="passwordError() ? 'true' : null"
+                    [attr.aria-describedby]="passwordError() ? 'password-error' : null"
+                    class="form-input"
+                    autocomplete="new-password"
+                    required
+                    [disabled]="isSubmitting()"
+                />
+                @if (passwordError()) {
+                    <span id="password-error" class="form-error" role="alert">
+                        {{ passwordError() }}
+                    </span>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword" class="form-label">
+                    Confirm password
+                    <span aria-hidden="true">*</span>
+                </label>
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    [value]="confirmPassword()"
+                    (input)="updateConfirmPassword($event)"
+                    [class.form-input--error]="confirmPasswordError()"
+                    [attr.aria-invalid]="confirmPasswordError() ? 'true' : null"
+                    [attr.aria-describedby]="confirmPasswordError() ? 'confirm-password-error' : null"
+                    class="form-input"
+                    autocomplete="new-password"
+                    required
+                    [disabled]="isSubmitting()"
+                />
+                @if (confirmPasswordError()) {
+                    <span id="confirm-password-error" class="form-error" role="alert">
+                        {{ confirmPasswordError() }}
+                    </span>
+                }
+            </div>
+
+            @if (generalError()) {
+                <div class="form-error form-error--general" role="alert">
+                    {{ generalError() }}
+                </div>
+            }
+
+            <app-button
+                type="submit"
+                variant="filled"
+                size="lg"
+                [disabled]="isSubmitting()"
+            >
+                @if (isSubmitting()) {
+                    Creating account...
+                } @else {
+                    Create Account
+                }
+            </app-button>
+        </form>
+
+        <p class="auth-card__footer">
+            Already have an account?
+            <a routerLink="/login" class="auth-card__link">Sign in</a>
+        </p>
+    </div>
+</div>
+
+@if (showSuccess()) {
+    <app-success-modal message="Welcome to Blogr! Your account has been created. Redirecting you to sign in..." />
+}
