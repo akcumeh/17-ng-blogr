@@ -29,7 +29,7 @@
         <div class="header__actions hidden-mobile">
             @if (isAuthenticated()) {
                 <span class="header__welcome">
-                    Welcome, {{ currentUser()?.firstName }}!
+                        Welcome {{ currentUser()?.firstName }}
                 </span>
                 <app-button variant="ghost" size="md" (click)="logout()">
                     Logout

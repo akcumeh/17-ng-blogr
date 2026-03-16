@@ -1,0 +1,92 @@
+<div class="auth-container">
+    <div class="auth-card">
+        <a href="/" class="auth-card__logo">
+            <img src="assets/images/logo.svg" alt="Blogr" />
+        </a>
+
+        <h1 class="auth-card__title">Welcome back</h1>
+        <p class="auth-card__subtitle">Sign in to your account to continue</p>
+
+        <form class="auth-form" (submit)="handleSubmit($event)" novalidate>
+            <div class="form-group">
+                <label for="email" class="form-label">
+                    Email address
+                    <span aria-hidden="true">*</span>
+                </label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    [value]="email()"
+                    (input)="updateEmail($event)"
+                    [class.form-input--error]="emailError()"
+                    [attr.aria-invalid]="emailError() ? 'true' : null"
+                    [attr.aria-describedby]="emailError() ? 'email-error' : null"
+                    class="form-input"
+                    autocomplete="email"
+                    required
+                    [disabled]="isSubmitting()"
+                />
+                @if (emailError()) {
+                    <span id="email-error" class="form-error" role="alert">
+                        {{ emailError() }}
+                    </span>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label">
+                    Password
+                    <span aria-hidden="true">*</span>
+                </label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    [value]="password()"
+                    (input)="updatePassword($event)"
+                    [class.form-input--error]="passwordError()"
+                    [attr.aria-invalid]="passwordError() ? 'true' : null"
+                    [attr.aria-describedby]="passwordError() ? 'password-error' : null"
+                    class="form-input"
+                    autocomplete="current-password"
+                    required
+                    [disabled]="isSubmitting()"
+                />
+                @if (passwordError()) {
+                    <span id="password-error" class="form-error" role="alert">
+                        {{ passwordError() }}
+                    </span>
+                }
+            </div>
+
+            @if (generalError()) {
+                <div class="form-error form-error--general" role="alert">
+                    {{ generalError() }}
+                </div>
+            }
+
+            <app-button
+                type="submit"
+                variant="filled"
+                size="lg"
+                [disabled]="isSubmitting()"
+            >
+                @if (isSubmitting()) {
+                    Signing in...
+                } @else {
+                    Sign In
+                }
+            </app-button>
+        </form>
+
+        <p class="auth-card__footer">
+            Don't have an account?
+            <a routerLink="/signup" class="auth-card__link">Sign up</a>
+        </p>
+    </div>
+</div>
+
+@if (showSuccess()) {
+    <app-success-modal message="You have successfully logged in! Redirecting you to the home page..." />
+}

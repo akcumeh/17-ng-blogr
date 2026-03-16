@@ -1,0 +1,172 @@
+@use '../../../../styles/tokens';
+@use '../../../../styles/mixins';
+
+.auth-container {
+    min-height: 100vh;
+    @include mixins.flex-center;
+    @include mixins.gradient-intro;
+    padding: tokens.$spacing-lg;
+}
+
+.auth-card {
+    background: tokens.$color-white;
+    border-radius: tokens.$radius-lg;
+    padding: tokens.$spacing-2xl;
+    max-width: 28rem;
+    width: 100%;
+    box-shadow: 0 1.25rem 2.5rem rgba(0, 0, 0, 0.15);
+    animation: page-enter 500ms ease both;
+
+    @include mixins.breakpoint('desktop') {
+        max-width: 50%;
+    }
+
+    &__logo {
+        display: flex;
+        justify-content: center;
+        margin: 0 auto tokens.$spacing-xl;
+
+        img {
+            max-width: 6.25rem;
+            filter: invert(58%) sepia(56%) saturate(472%) hue-rotate(324deg) brightness(102%) contrast(101%);
+        }
+    }
+
+    &__title {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-h3;
+        font-weight: tokens.$font-weight-ubuntu-bold;
+        color: tokens.$color-blue-900;
+        text-align: center;
+        margin-bottom: tokens.$spacing-sm;
+    }
+
+    &__subtitle {
+        font-family: tokens.$font-family-overpass;
+        font-size: tokens.$font-size-base;
+        font-weight: tokens.$font-weight-overpass-light;
+        color: tokens.$color-gray-600;
+        text-align: center;
+        margin-bottom: tokens.$spacing-2xl;
+    }
+
+    &__footer {
+        margin-top: tokens.$spacing-xl;
+        font-family: tokens.$font-family-overpass;
+        font-size: tokens.$font-size-base;
+        font-weight: tokens.$font-weight-overpass-light;
+        color: tokens.$color-gray-600;
+        text-align: center;
+    }
+
+    &__link {
+        color: tokens.$color-red-500;
+        font-weight: tokens.$font-weight-overpass-semibold;
+        text-decoration: none;
+        @include mixins.smooth-transition(color);
+
+        &:hover {
+            color: tokens.$color-red-400;
+            text-decoration: underline;
+        }
+
+        &:focus-visible {
+            outline: 2px solid tokens.$color-red-500;
+            outline-offset: 2px;
+            border-radius: tokens.$radius-sm;
+        }
+    }
+}
+
+.auth-form {
+    @include mixins.flex-column;
+    gap: tokens.$spacing-lg;
+    align-items: center;
+
+    app-button {
+        display: flex;
+        justify-content: center;
+
+        button {
+            min-width: 12rem;
+        }
+    }
+}
+
+.form-group {
+    @include mixins.flex-column;
+    gap: tokens.$spacing-sm;
+    width: 90%;
+}
+
+.form-label {
+    font-family: tokens.$font-family-ubuntu;
+    font-size: tokens.$font-size-base;
+    font-weight: tokens.$font-weight-ubuntu-medium;
+    color: tokens.$color-blue-900;
+
+    span {
+        color: tokens.$color-red-500;
+    }
+}
+
+.form-input {
+    font-family: tokens.$font-family-overpass;
+    font-size: tokens.$font-size-base;
+    color: tokens.$color-blue-900;
+    padding: tokens.$spacing-md;
+    border: 1px solid tokens.$color-gray-200;
+    border-radius: tokens.$radius-md;
+    @include mixins.smooth-transition(border-color);
+
+    &:hover:not(:disabled) {
+        border-color: tokens.$color-gray-600;
+    }
+
+    &:focus {
+        outline: none;
+        border-color: tokens.$color-red-500;
+        box-shadow: 0 0 0 3px rgba(hsl(356, 100%, 66%), 0.1);
+    }
+
+    &:disabled {
+        background-color: tokens.$color-gray-100;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    &--error {
+        border-color: tokens.$color-red-500;
+
+        &:focus {
+            box-shadow: 0 0 0 3px rgba(hsl(356, 100%, 66%), 0.2);
+        }
+    }
+}
+
+.form-error {
+    font-family: tokens.$font-family-overpass;
+    font-size: tokens.$font-size-sm;
+    color: tokens.$color-red-500;
+    font-weight: tokens.$font-weight-overpass-semibold;
+
+    &--general {
+        text-align: center;
+        padding: tokens.$spacing-md;
+        background-color: rgba(hsl(356, 100%, 66%), 0.1);
+        border-radius: tokens.$radius-md;
+        border: 1px solid tokens.$color-red-500;
+        width: 90%;
+    }
+}
+
+@keyframes page-enter {
+    from {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
