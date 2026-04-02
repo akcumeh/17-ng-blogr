@@ -4,7 +4,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 
 import { routes } from './app.routes';
-import { AuthService } from './core/services/auth.service';
+import { AuthService } from './core/services/auth';
 
 export const appConfig: ApplicationConfig = {
   providers: [

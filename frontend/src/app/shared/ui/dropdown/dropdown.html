@@ -16,7 +16,7 @@
     @if (isOpen()) {
         <div class="dropdown__menu" [class.dropdown__menu--closing]="isClosing()">
             @for (item of items(); track item.href) {
-                <a [href]="item.href" class="dropdown__item">{{ item.label }}</a>
+                <a [href]="item.href" class="dropdown__item" (click)="handleItemClick(item, $event)">{{ item.label }}</a>
             }
         </div>
     }
