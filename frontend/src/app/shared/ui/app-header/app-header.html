@@ -1,0 +1,49 @@
+<header class="header" [class.header--transparent]="transparent()">
+    <div class="header__container">
+        <a routerLink="/" class="header__logo">
+            <img src="assets/images/logo.svg" alt="Blogr" />
+        </a>
+
+        <button
+            class="header__hamburger hidden-desktop"
+            (click)="toggleMobileMenu()"
+            [attr.aria-expanded]="isMobileMenuOpen()"
+            aria-label="Toggle menu"
+        >
+            <img
+                [src]="isMobileMenuOpen() ? 'assets/images/icon-close.svg' : 'assets/images/icon-hamburger.svg'"
+                alt=""
+            />
+        </button>
+
+        <nav class="header__nav hidden-mobile">
+            @for (group of navGroups(); track group.label) {
+                <app-dropdown
+                    [label]="group.label"
+                    [items]="group.items"
+                    (opened)="onDropdownOpened($event)"
+                />
+            }
+        </nav>
+
+        <div class="header__actions hidden-mobile">
+            @if (isAuthenticated()) {
+                <span class="header__welcome">Welcome {{ currentUser()?.firstName }}</span>
+                <app-button variant="ghost" size="md" (click)="logout()">Logout</app-button>
+            } @else {
+                <a routerLink="/login">
+                    <app-button variant="ghost" size="md">Login</app-button>
+                </a>
+                <a routerLink="/signup">
+                    <app-button variant="secondary" size="md">Sign Up</app-button>
+                </a>
+            }
+        </div>
+    </div>
+</header>
+
+<app-mobile-menu
+    [isOpen]="isMobileMenuOpen()"
+    [navGroups]="navGroups()"
+    (closed)="closeMobileMenu()"
+/>
