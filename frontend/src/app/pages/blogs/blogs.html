@@ -1,0 +1,82 @@
+<app-header [navGroups]="navGroups" [transparent]="true" />
+
+<main class="blogs">
+    <section class="blogs__hero" aria-labelledby="blogs-heading">
+        <div class="blogs__hero-content">
+            <h1 id="blogs-heading" class="blogs__hero-title">All Posts</h1>
+            <p class="blogs__hero-subtitle">
+                Insightful stories from the world of modern publishing and creative design.
+            </p>
+        </div>
+    </section>
+
+    <section class="blogs__content" aria-label="Blog posts">
+        @if (isLoading() && !hasPosts()) {
+            <p class="blogs__status" role="status">Loading posts...</p>
+        }
+
+        @if (error()) {
+            <div class="blogs__error" role="alert">
+                <p>{{ error() }}</p>
+                <app-button variant="primary" size="md" (click)="loadPage(currentPage())">
+                    Retry
+                </app-button>
+            </div>
+        }
+
+        @if (hasPosts()) {
+            <div class="blogs__grid">
+                @for (post of posts(); track post._id) {
+                    <app-post-card [post]="post" />
+                }
+            </div>
+        } @else if (!isLoading() && !error()) {
+            <div class="blogs__empty">
+                <p class="blogs__empty-title">No posts yet</p>
+                <p class="blogs__empty-subtitle">Check back later for new stories and insights.</p>
+            </div>
+        }
+
+        @if (hasNextPage() && !isDesktop()) {
+            <div class="blogs__load-more">
+                <app-button
+                    variant="primary"
+                    size="lg"
+                    [disabled]="isLoading()"
+                    (click)="loadPage(currentPage() + 1)"
+                >
+                    @if (isLoading()) { Loading... } @else { Load More Posts }
+                </app-button>
+            </div>
+        }
+
+        @if (totalPages() > 1 && isDesktop()) {
+            <nav class="blogs__pagination" aria-label="Post pagination">
+                <button
+                    class="blogs__pagination-btn"
+                    [disabled]="currentPage() === 1"
+                    (click)="loadPage(currentPage() - 1)"
+                    aria-label="Previous page"
+                >←</button>
+
+                @for (page of paginationPages(); track page) {
+                    <button
+                        class="blogs__pagination-btn"
+                        [class.blogs__pagination-btn--active]="page === currentPage()"
+                        [attr.aria-current]="page === currentPage() ? 'page' : null"
+                        (click)="loadPage(page)"
+                    >{{ page }}</button>
+                }
+
+                <button
+                    class="blogs__pagination-btn"
+                    [disabled]="currentPage() === totalPages()"
+                    (click)="loadPage(currentPage() + 1)"
+                    aria-label="Next page"
+                >→</button>
+            </nav>
+        }
+    </section>
+</main>
+
+<app-footer [navGroups]="navGroups" />

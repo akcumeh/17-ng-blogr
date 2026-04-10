@@ -1,0 +1,203 @@
+@use '../../../styles/tokens';
+@use '../../../styles/mixins';
+
+:host {
+    display: block;
+    background: tokens.$color-white;
+    min-height: 100vh;
+}
+
+.blogs {
+    &__hero {
+        position: relative;
+        @include mixins.gradient-intro;
+        border-bottom-left-radius: tokens.$radius-xl;
+        padding: tokens.$spacing-5xl tokens.$spacing-lg tokens.$spacing-4xl;
+        text-align: center;
+        overflow: hidden;
+
+        @include mixins.breakpoint('tablet') {
+            padding: tokens.$spacing-5xl tokens.$spacing-2xl tokens.$spacing-4xl;
+        }
+
+        @include mixins.breakpoint('desktop') {
+            padding: tokens.$spacing-5xl tokens.$spacing-xl tokens.$spacing-4xl;
+            border-bottom-left-radius: 6.25rem;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('/assets/images/bg-pattern-intro-mobile.svg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: 0;
+
+            @include mixins.breakpoint('desktop') {
+                background-image: url('/assets/images/bg-pattern-intro-desktop.svg');
+            }
+        }
+    }
+
+    &__hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 50rem;
+        margin-inline: auto;
+        animation: page-enter 500ms ease both;
+    }
+
+    &__hero-title {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-h1-mobile;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        color: tokens.$color-white;
+        line-height: 1.1;
+        margin-bottom: tokens.$spacing-md;
+
+        @include mixins.breakpoint('desktop') {
+            font-size: tokens.$font-size-h1;
+            margin-bottom: tokens.$spacing-lg;
+        }
+    }
+
+    &__hero-subtitle {
+        font-family: tokens.$font-family-overpass;
+        font-size: tokens.$font-size-lg;
+        font-weight: tokens.$font-weight-overpass-light;
+        color: tokens.$color-white;
+        opacity: 0.9;
+
+        @include mixins.breakpoint('desktop') {
+            font-size: 1.25rem;
+        }
+    }
+
+    &__content {
+        max-width: 75rem;
+        margin-inline: auto;
+        width: 100%;
+        padding: tokens.$spacing-3xl tokens.$spacing-lg tokens.$spacing-5xl;
+
+        @include mixins.breakpoint('tablet') {
+            padding: tokens.$spacing-4xl tokens.$spacing-xl tokens.$spacing-5xl;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: tokens.$spacing-xl;
+
+        @include mixins.breakpoint('tablet') {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include mixins.breakpoint('desktop') {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    &__status {
+        font-family: tokens.$font-family-overpass;
+        font-size: tokens.$font-size-base;
+        color: tokens.$color-gray-600;
+        text-align: center;
+        padding: tokens.$spacing-4xl 0;
+    }
+
+    &__error {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: tokens.$spacing-lg;
+        padding: tokens.$spacing-4xl 0;
+        text-align: center;
+
+        p {
+            font-family: tokens.$font-family-overpass;
+            font-size: tokens.$font-size-base;
+            color: tokens.$color-red-500;
+        }
+    }
+
+    &__empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: tokens.$spacing-sm;
+        padding: tokens.$spacing-5xl 0;
+        text-align: center;
+    }
+
+    &__empty-title {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-h3;
+        font-weight: tokens.$font-weight-ubuntu-bold;
+        color: tokens.$color-blue-900;
+    }
+
+    &__empty-subtitle {
+        font-family: tokens.$font-family-overpass;
+        font-size: tokens.$font-size-lg;
+        font-weight: tokens.$font-weight-overpass-light;
+        color: tokens.$color-gray-600;
+    }
+
+    &__load-more {
+        display: flex;
+        justify-content: center;
+        margin-top: tokens.$spacing-3xl;
+    }
+
+    &__pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: tokens.$spacing-sm;
+        margin-top: tokens.$spacing-3xl;
+    }
+
+    &__pagination-btn {
+        background: transparent;
+        border: 1px solid tokens.$color-gray-200;
+        color: tokens.$color-gray-600;
+        border-radius: tokens.$radius-sm;
+        padding: tokens.$spacing-sm tokens.$spacing-md;
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-base;
+        cursor: pointer;
+        min-width: 2.5rem;
+        @include mixins.smooth-transition();
+
+        &:hover:not(:disabled) {
+            border-color: tokens.$color-red-500;
+            color: tokens.$color-red-500;
+        }
+
+        &:focus-visible {
+            outline: 2px solid tokens.$color-red-500;
+            outline-offset: 2px;
+        }
+
+        &:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        &--active {
+            background: tokens.$color-red-500;
+            border-color: tokens.$color-red-500;
+            color: tokens.$color-white;
+            font-weight: tokens.$font-weight-ubuntu-bold;
+
+            &:hover {
+                background: tokens.$color-red-400;
+                border-color: tokens.$color-red-400;
+                color: tokens.$color-white;
+            }
+        }
+    }
+}
