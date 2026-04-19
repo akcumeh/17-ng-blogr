@@ -1,0 +1,72 @@
+<app-header [navGroups]="navGroups" [transparent]="true" />
+
+<main class="blog-detail">
+
+    @if (isLoading()) {
+        <div class="blog-detail__hero blog-detail__hero--skeleton">
+            <div class="blog-detail__hero-content">
+                <p class="blog-detail__status" role="status">Loading post...</p>
+            </div>
+        </div>
+    }
+
+    @if (error()) {
+        <div class="blog-detail__hero blog-detail__hero--error">
+            <div class="blog-detail__hero-content">
+                <p class="blog-detail__error-message" role="alert">{{ error() }}</p>
+                <a routerLink="/blogs" class="blog-detail__back-link blog-detail__back-link--light">
+                    <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span> Back to feed
+                </a>
+            </div>
+        </div>
+    }
+
+    @if (post(); as p) {
+        <section class="blog-detail__hero" aria-label="Post header">
+            <div class="blog-detail__hero-content">
+                <a routerLink="/blogs" class="blog-detail__back-link"><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span> Back to feed</a>
+                <h1 class="blog-detail__title">{{ p.title }}</h1>
+                <div class="blog-detail__meta">
+                    <div class="blog-detail__avatar" aria-hidden="true">
+                        {{ p.author.first_name.charAt(0) }}{{ p.author.last_name.charAt(0) }}
+                    </div>
+                    <span class="blog-detail__author-name">
+                        {{ p.author.first_name }} {{ p.author.last_name }}
+                    </span>
+                    <span class="blog-detail__meta-sep" aria-hidden="true">·</span>
+                    <span class="blog-detail__date">{{ p.createdAt | date:'MMM d, y' }}</span>
+                    <span class="blog-detail__meta-sep" aria-hidden="true">·</span>
+                    <svg class="blog-detail__clock-icon" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    <span class="blog-detail__reading-time">{{ p.reading_time }} min read</span>
+                </div>
+            </div>
+        </section>
+
+        <article class="blog-detail__article" aria-label="Post content">
+            <div class="blog-detail__body" [innerHTML]="p.body"></div>
+
+            <footer class="blog-detail__author-card">
+                <div class="blog-detail__author-avatar" aria-hidden="true">
+                    {{ p.author.first_name.charAt(0) }}{{ p.author.last_name.charAt(0) }}
+                </div>
+                <div class="blog-detail__author-info">
+                    <h2 class="blog-detail__author-heading">
+                        About {{ p.author.first_name }} {{ p.author.last_name }}
+                    </h2>
+                    <p class="blog-detail__author-bio">
+                        {{ p.author.first_name }} writes on Blogr. Follow their work for more
+                        insights on modern publishing and digital design.
+                    </p>
+                </div>
+            </footer>
+        </article>
+    }
+
+</main>
+
+<app-footer [navGroups]="navGroups" />

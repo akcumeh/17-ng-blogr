@@ -133,7 +133,8 @@
 
     &__arrow {
         color: tokens.$color-red-500;
-        font-size: tokens.$font-size-lg;
+        font-size: 1.25rem;
         flex-shrink: 0;
+        user-select: none;
     }
 }

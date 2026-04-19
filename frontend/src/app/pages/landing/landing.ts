@@ -13,6 +13,7 @@ import { AppFooter } from '../../shared/ui/app-footer/app-footer';
 import { Features } from '../features/features';
 import { NavGroup } from '../../shared/ui/mobile-menu/mobile-menu';
 
+
 @Component({
     selector: 'app-landing',
     imports: [RouterLink, ButtonComponent, AppHeader, AppFooter, Features],
@@ -23,6 +24,7 @@ import { NavGroup } from '../../shared/ui/mobile-menu/mobile-menu';
         '(window:scroll)': 'onScroll()'
     }
 })
+
 export class Landing implements AfterViewInit {
     protected isNavTransparent = signal(true);
 

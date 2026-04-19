@@ -10,7 +10,7 @@
     </header>
 
     <h2 class="post-card__title">
-        <a [routerLink]="['/blogs', post()._id]" class="post-card__title-link">
+        <a [routerLink]="['/blogs', post().id]" class="post-card__title-link">
             {{ post().title }}
         </a>
     </h2>
@@ -27,6 +27,6 @@
             </span>
             <span class="post-card__date">{{ post().createdAt | date:'MMM dd, y' }}</span>
         </div>
-        <span class="post-card__arrow" aria-hidden="true">→</span>
+        <span class="material-symbols-outlined post-card__arrow" aria-hidden="true">arrow_forward</span>
     </footer>
 </article>

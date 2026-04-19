@@ -71,8 +71,11 @@ export class Login {
             },
             error: (err: HttpErrorResponse) => {
                 this.isSubmitting.set(false);
+                const isClientError = err.status >= 400 && err.status < 500;
                 this.generalError.set(
-                    err.error?.error ?? 'Wrong email address or password. Are you sure you have an account?'
+                    isClientError
+                        ? (err.error?.error ?? 'Wrong email address or password.')
+                        : 'Something went wrong. Please try again later.'
                 );
             }
         });
