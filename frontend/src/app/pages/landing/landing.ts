@@ -50,7 +50,7 @@ export class Landing implements AfterViewInit {
             items: [
                 { label: 'About', href: '#' },
                 { label: 'Team', href: '#' },
-                { label: 'Blog', href: '/blogs' },
+                { label: 'Blogs', href: '/blogs' },
                 { label: 'Careers', href: '#' }
             ]
         },

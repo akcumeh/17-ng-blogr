@@ -2,12 +2,14 @@
 @use '../../../styles/mixins';
 
 :host {
-    display: block;
+    display: flex;
+    flex-direction: column;
     background: tokens.$color-white;
     min-height: 100vh;
 }
 
 .blogs {
+    flex: 1;
     &__hero {
         position: relative;
         @include mixins.gradient-intro;
@@ -50,9 +52,9 @@
     }
 
     &__hero-title {
-        font-family: tokens.$font-family-ubuntu;
+        font-family: tokens.$font-family-overpass;
         font-size: tokens.$font-size-h1-mobile;
-        font-weight: tokens.$font-weight-ubuntu-medium;
+        font-weight: tokens.$font-weight-overpass-semibold;
         color: tokens.$color-white;
         line-height: 1.1;
         margin-bottom: tokens.$spacing-md;
@@ -64,9 +66,9 @@
     }
 
     &__hero-subtitle {
-        font-family: tokens.$font-family-overpass;
+        font-family: tokens.$font-family-ubuntu;
         font-size: tokens.$font-size-lg;
-        font-weight: tokens.$font-weight-overpass-light;
+        font-weight: tokens.$font-weight-ubuntu-regular;
         color: tokens.$color-white;
         opacity: 0.9;
 
@@ -101,7 +103,7 @@
     }
 
     &__status {
-        font-family: tokens.$font-family-overpass;
+        font-family: tokens.$font-family-ubuntu;
         font-size: tokens.$font-size-base;
         color: tokens.$color-gray-600;
         text-align: center;
@@ -117,7 +119,7 @@
         text-align: center;
 
         p {
-            font-family: tokens.$font-family-overpass;
+            font-family: tokens.$font-family-ubuntu;
             font-size: tokens.$font-size-base;
             color: tokens.$color-red-500;
         }
@@ -133,16 +135,16 @@
     }
 
     &__empty-title {
-        font-family: tokens.$font-family-ubuntu;
+        font-family: tokens.$font-family-overpass;
         font-size: tokens.$font-size-h3;
-        font-weight: tokens.$font-weight-ubuntu-bold;
+        font-weight: tokens.$font-weight-overpass-semibold;
         color: tokens.$color-blue-900;
     }
 
     &__empty-subtitle {
-        font-family: tokens.$font-family-overpass;
+        font-family: tokens.$font-family-ubuntu;
         font-size: tokens.$font-size-lg;
-        font-weight: tokens.$font-weight-overpass-light;
+        font-weight: tokens.$font-weight-ubuntu-regular;
         color: tokens.$color-gray-600;
     }
 

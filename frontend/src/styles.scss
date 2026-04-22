@@ -1,23 +1,72 @@
-/* Global Styles
- * Import order matters:
- * 1. Tokens - everything depends on these
- * 2. Reset - establish baseline
- * 3. Typography - depends on tokens
- * 4. Mixins - utilities for components
- * 5. Utilities - template classes
- */
-
-// 1. Tokens first - everything else depends on these
 @use 'styles/tokens';
-
-// 2. Reset - establish baseline styles
 @use 'styles/reset';
-
-// 3. Typography - depends on tokens
 @use 'styles/typography';
-
-// 4. Mixins - utilities for components to use
 @use 'styles/mixins';
-
-// 5. Utilities - can be used in templates
 @use 'styles/utilities';
+
+.blog-detail__body {
+    h2 {
+        font-family: tokens.$font-family-overpass;
+        font-size: tokens.$font-size-h3;
+        font-weight: tokens.$font-weight-overpass-semibold;
+        color: tokens.$color-red-500;
+        margin-top: tokens.$spacing-3xl;
+        margin-bottom: tokens.$spacing-md;
+        line-height: 1.2;
+    }
+
+    h3 {
+        font-family: tokens.$font-family-overpass;
+        font-size: tokens.$font-size-lg;
+        font-weight: tokens.$font-weight-overpass-semibold;
+        color: tokens.$color-blue-900;
+        margin-top: tokens.$spacing-xl;
+        margin-bottom: tokens.$spacing-md;
+    }
+
+    blockquote {
+        border-left: 4px solid tokens.$color-red-500;
+        padding-left: tokens.$spacing-lg;
+        margin: tokens.$spacing-xl 0;
+        font-style: italic;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        color: tokens.$color-blue-900;
+        font-size: tokens.$font-size-lg;
+        line-height: 1.6;
+    }
+
+    img {
+        width: 100%;
+        border-radius: tokens.$radius-md;
+        margin: tokens.$spacing-xl 0;
+        display: block;
+    }
+
+    figcaption {
+        font-size: tokens.$font-size-sm;
+        color: tokens.$color-gray-600;
+        opacity: 0.7;
+        text-align: center;
+        margin-top: calc(-1 * tokens.$spacing-md);
+        margin-bottom: tokens.$spacing-xl;
+    }
+
+    a {
+        color: tokens.$color-red-500;
+
+        &:hover { opacity: 0.8; }
+
+        &:focus-visible {
+            outline: 2px solid tokens.$color-red-500;
+            outline-offset: 2px;
+        }
+    }
+
+    ul,
+    ol {
+        padding-left: tokens.$spacing-xl;
+        margin-bottom: tokens.$spacing-lg;
+
+        li { margin-bottom: tokens.$spacing-sm; }
+    }
+}

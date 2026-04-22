@@ -57,7 +57,7 @@
                     [disabled]="currentPage() === 1"
                     (click)="loadPage(currentPage() - 1)"
                     aria-label="Previous page"
-                >←</button>
+                ><span class="material-symbols-outlined" aria-hidden="true">arrow_back</span></button>
 
                 @for (page of paginationPages(); track page) {
                     <button
@@ -73,7 +73,7 @@
                     [disabled]="currentPage() === totalPages()"
                     (click)="loadPage(currentPage() + 1)"
                     aria-label="Next page"
-                >→</button>
+                ><span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></button>
             </nav>
         }
     </section>

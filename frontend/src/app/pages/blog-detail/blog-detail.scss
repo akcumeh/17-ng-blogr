@@ -2,12 +2,14 @@
 @use '../../../styles/mixins';
 
 :host {
-    display: block;
+    display: flex;
+    flex-direction: column;
     background: tokens.$color-white;
     min-height: 100vh;
 }
 
 .blog-detail {
+    flex: 1;
 
     &__hero {
         position: relative;
@@ -70,10 +72,10 @@
             font-size: 1.125rem;
             user-select: none;
         }
-        font-family: tokens.$font-family-overpass;
-        font-size: tokens.$font-size-sm;
-        font-weight: tokens.$font-weight-overpass-regular;
-        color: rgba(255, 255, 255, 0.85);
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-base;
+        font-weight: tokens.$font-weight-ubuntu-regular;
+        color: tokens.$color-white;
         text-decoration: none;
         margin-bottom: tokens.$spacing-xl;
         @include mixins.smooth-transition(color opacity);
@@ -90,9 +92,9 @@
     }
 
     &__title {
-        font-family: tokens.$font-family-ubuntu;
+        font-family: tokens.$font-family-overpass;
         font-size: tokens.$font-size-h1-mobile;
-        font-weight: tokens.$font-weight-ubuntu-bold;
+        font-weight: tokens.$font-weight-overpass-semibold;
         color: tokens.$color-white;
         line-height: 1.1;
         margin-bottom: tokens.$spacing-xl;
@@ -130,7 +132,7 @@
 
     &__author-name {
         font-family: tokens.$font-family-ubuntu;
-        font-size: tokens.$font-size-sm;
+        font-size: tokens.$font-size-base;
         font-weight: tokens.$font-weight-ubuntu-medium;
         color: tokens.$color-white;
     }
@@ -140,7 +142,7 @@
     }
 
     &__date {
-        font-family: tokens.$font-family-overpass;
+        font-family: tokens.$font-family-ubuntu;
         font-size: tokens.$font-size-sm;
     }
 
@@ -150,25 +152,23 @@
     }
 
     &__reading-time {
-        font-family: tokens.$font-family-overpass;
+        font-family: tokens.$font-family-ubuntu;
         font-size: tokens.$font-size-sm;
     }
-    // ─── Status / error in hero ───────────────────────────────────────────────
 
     &__status {
-        font-family: tokens.$font-family-overpass;
+        font-family: tokens.$font-family-ubuntu;
         font-size: tokens.$font-size-lg;
         color: rgba(255, 255, 255, 0.8);
     }
 
     &__error-message {
-        font-family: tokens.$font-family-ubuntu;
+        font-family: tokens.$font-family-overpass;
         font-size: tokens.$font-size-h3;
-        font-weight: tokens.$font-weight-ubuntu-bold;
+        font-weight: tokens.$font-weight-overpass-semibold;
         color: tokens.$color-white;
         margin-bottom: tokens.$spacing-lg;
     }
-
 
     &__article {
         max-width: 48rem;
@@ -176,14 +176,19 @@
         padding: tokens.$spacing-3xl tokens.$spacing-lg tokens.$spacing-5xl;
 
         @include mixins.breakpoint('tablet') {
-            padding: tokens.$spacing-4xl tokens.$spacing-xl tokens.$spacing-5xl;
+            padding: tokens.$spacing-4xl tokens.$spacing-lg tokens.$spacing-5xl;
+        }
+
+        @include mixins.breakpoint('desktop') {
+            max-width: 75rem;
+            padding: tokens.$spacing-4xl 0 tokens.$spacing-5xl;
         }
     }
 
     &__body {
-        font-family: tokens.$font-family-overpass;
+        font-family: tokens.$font-family-ubuntu;
         font-size: tokens.$font-size-base;
-        font-weight: tokens.$font-weight-overpass-light;
+        font-weight: tokens.$font-weight-ubuntu-regular;
         color: tokens.$color-gray-600;
         line-height: 1.85;
 
@@ -191,73 +196,14 @@
             margin-bottom: tokens.$spacing-lg;
         }
 
-        h2 {
-            font-family: tokens.$font-family-ubuntu;
-            font-size: tokens.$font-size-h3;
-            font-weight: tokens.$font-weight-ubuntu-bold;
-            color: tokens.$color-red-500;
-            margin-top: tokens.$spacing-3xl;
-            margin-bottom: tokens.$spacing-md;
-            line-height: 1.2;
+        @include mixins.breakpoint('desktop') {
+            max-width: 48rem;
         }
+    }
 
-        h3 {
-            font-family: tokens.$font-family-ubuntu;
-            font-size: tokens.$font-size-lg;
-            font-weight: tokens.$font-weight-ubuntu-bold;
-            color: tokens.$color-blue-900;
-            margin-top: tokens.$spacing-xl;
-            margin-bottom: tokens.$spacing-md;
-        }
-
-        blockquote {
-            border-left: 4px solid tokens.$color-red-500;
-            padding-left: tokens.$spacing-lg;
-            margin: tokens.$spacing-xl 0;
-            font-style: italic;
-            font-weight: tokens.$font-weight-overpass-semibold;
-            color: tokens.$color-blue-900;
-            font-size: tokens.$font-size-lg;
-            line-height: 1.6;
-        }
-
-        img {
-            width: 100%;
-            border-radius: tokens.$radius-md;
-            margin: tokens.$spacing-xl 0;
-            display: block;
-        }
-
-        figcaption {
-            font-size: tokens.$font-size-sm;
-            color: tokens.$color-gray-600;
-            opacity: 0.7;
-            text-align: center;
-            margin-top: calc(-1 * tokens.$spacing-md);
-            margin-bottom: tokens.$spacing-xl;
-        }
-
-        a {
-            color: tokens.$color-red-500;
-            @include mixins.smooth-transition(opacity);
-
-            &:hover { opacity: 0.8; }
-
-            &:focus-visible {
-                outline: 2px solid tokens.$color-red-500;
-                outline-offset: 2px;
-                border-radius: tokens.$radius-sm;
-            }
-        }
-
-        ul,
-        ol {
-            padding-left: tokens.$spacing-xl;
-            margin-bottom: tokens.$spacing-lg;
-
-            li {
-                margin-bottom: tokens.$spacing-sm;
-            }
+    &__author-card-wrapper {
+        @include mixins.breakpoint('desktop') {
+            max-width: 48rem;
         }
     }
 
@@ -295,16 +241,16 @@
     }
 
     &__author-heading {
-        font-family: tokens.$font-family-ubuntu;
+        font-family: tokens.$font-family-overpass;
         font-size: tokens.$font-size-base;
-        font-weight: tokens.$font-weight-ubuntu-bold;
+        font-weight: tokens.$font-weight-overpass-semibold;
         color: tokens.$color-blue-900;
     }
 
     &__author-bio {
-        font-family: tokens.$font-family-overpass;
+        font-family: tokens.$font-family-ubuntu;
         font-size: tokens.$font-size-sm;
-        font-weight: tokens.$font-weight-overpass-light;
+        font-weight: tokens.$font-weight-ubuntu-regular;
         color: tokens.$color-gray-600;
         line-height: 1.7;
     }

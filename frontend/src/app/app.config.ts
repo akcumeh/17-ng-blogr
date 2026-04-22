@@ -15,7 +15,7 @@ export const appConfig: ApplicationConfig = {
       provide: APP_INITIALIZER,
       useFactory: () => {
         const authService = inject(AuthService);
-        // Convert the Observable to a Promise — APP_INITIALIZER requires a function
+        // Convert the Observable to a Promise. APP_INITIALIZER requires a function
         // that returns a Promise (or void). Angular waits for it to resolve before
         // rendering anything, so the navbar already knows the user on first paint.
         return () => firstValueFrom(authService.initialize());
