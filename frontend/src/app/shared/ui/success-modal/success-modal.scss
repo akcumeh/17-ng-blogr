@@ -1,10 +1,6 @@
 @use '../../../../styles/tokens';
 @use '../../../../styles/mixins';
 
-// :host targets the <app-success-modal> element itself.
-// This makes the component's own DOM node the full-screen overlay,
-// so position: fixed is guaranteed to work regardless of where the
-// component appears in the template tree.
 :host {
     position: fixed;
     inset: 0;

@@ -6,6 +6,7 @@ import {
     DestroyRef,
     OnInit,
 } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -25,6 +26,7 @@ export class BlogDetail implements OnInit {
     private readonly route = inject(ActivatedRoute);
     private readonly blogService = inject(BlogService);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly title = inject(Title);
 
     protected readonly post = signal<Post | null>(null);
     protected readonly isLoading = signal(true);
@@ -46,7 +48,7 @@ export class BlogDetail implements OnInit {
             items: [
                 { label: 'About', href: '#' },
                 { label: 'Team', href: '#' },
-                { label: 'Blog', href: '/blogs' },
+                { label: 'Blogs', href: '/blogs' },
                 { label: 'Careers', href: '#' },
             ],
         },
@@ -75,6 +77,7 @@ export class BlogDetail implements OnInit {
             .subscribe({
                 next: (post) => {
                     this.post.set(post);
+                    this.title.setTitle(`${post.title} | Blogr`);
                     this.isLoading.set(false);
                 },
                 error: (err) => {

@@ -7,6 +7,7 @@ import {
     DestroyRef,
     OnInit,
 } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AppHeader } from '../../shared/ui/app-header/app-header';
 import { AppFooter } from '../../shared/ui/app-footer/app-footer';
@@ -25,6 +26,7 @@ import { BlogService, Post } from '../../core/services/blog';
 export class Blogs implements OnInit {
     private readonly blogService = inject(BlogService);
     private readonly destroyRef = inject(DestroyRef);
+    private readonly title = inject(Title);
 
     protected readonly posts = signal<Post[]>([]);
     protected readonly currentPage = signal(1);
@@ -60,7 +62,7 @@ export class Blogs implements OnInit {
             items: [
                 { label: 'About', href: '#' },
                 { label: 'Team', href: '#' },
-                { label: 'Blog', href: '/blogs' },
+                { label: 'Blogs', href: '/blogs' },
                 { label: 'Careers', href: '#' },
             ],
         },
@@ -75,6 +77,7 @@ export class Blogs implements OnInit {
     ];
 
     ngOnInit(): void {
+        this.title.setTitle('All Posts | Blogr');
         this.isDesktop.set(window.innerWidth >= 1440);
         this.loadPage(1);
     }

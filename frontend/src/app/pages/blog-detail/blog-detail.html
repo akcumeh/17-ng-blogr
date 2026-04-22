@@ -50,20 +50,22 @@
         <article class="blog-detail__article" aria-label="Post content">
             <div class="blog-detail__body" [innerHTML]="p.body"></div>
 
-            <footer class="blog-detail__author-card">
-                <div class="blog-detail__author-avatar" aria-hidden="true">
-                    {{ p.author.first_name.charAt(0) }}{{ p.author.last_name.charAt(0) }}
-                </div>
-                <div class="blog-detail__author-info">
-                    <h2 class="blog-detail__author-heading">
-                        About {{ p.author.first_name }} {{ p.author.last_name }}
-                    </h2>
-                    <p class="blog-detail__author-bio">
-                        {{ p.author.first_name }} writes on Blogr. Follow their work for more
-                        insights on modern publishing and digital design.
-                    </p>
-                </div>
-            </footer>
+            <div class="blog-detail__author-card-wrapper">
+                <footer class="blog-detail__author-card">
+                    <div class="blog-detail__author-avatar" aria-hidden="true">
+                        {{ p.author.first_name.charAt(0) }}{{ p.author.last_name.charAt(0) }}
+                    </div>
+                    <div class="blog-detail__author-info">
+                        <h2 class="blog-detail__author-heading">
+                            About {{ p.author.first_name }} {{ p.author.last_name }}
+                        </h2>
+                        <p class="blog-detail__author-bio">
+                            {{ p.author.first_name }} writes on Blogr. Follow their work for more
+                            insights on modern publishing and digital design.
+                        </p>
+                    </div>
+                </footer>
+            </div>
         </article>
     }
 

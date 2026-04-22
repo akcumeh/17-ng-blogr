@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 export interface PostAuthor {
-    id: string;
+    _id: string;
     first_name: string;
     last_name: string;
     username: string;
 }
 
 export interface Post {
-    id: string;
+    _id: string;
     title: string;
     description: string;
     body: string;
