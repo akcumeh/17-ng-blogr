@@ -1,0 +1,152 @@
+@use '../../../../styles/tokens';
+@use '../../../../styles/mixins';
+
+.post-card {
+    background: tokens.$color-white;
+    border-radius: tokens.$radius-lg;
+    padding: tokens.$spacing-xl;
+    display: flex;
+    flex-direction: column;
+    gap: tokens.$spacing-md;
+    box-shadow: 0 0.125rem 1rem rgba(0, 0, 0, 0.08);
+    @include mixins.smooth-transition(box-shadow transform);
+
+    &:hover {
+        box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.14);
+        transform: translateY(-2px);
+    }
+
+    &--featured {
+        @include mixins.breakpoint('desktop') {
+            grid-column: span 2;
+        }
+    }
+
+    &__meta {
+        display: flex;
+        align-items: center;
+        gap: tokens.$spacing-sm;
+    }
+
+    &__clock-icon {
+        width: 1rem;
+        height: 1rem;
+        color: tokens.$color-red-500;
+        flex-shrink: 0;
+    }
+
+    &__reading-time {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-sm;
+        font-weight: tokens.$font-weight-ubuntu-bold;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: tokens.$color-red-500;
+    }
+
+    &__title {
+        font-family: tokens.$font-family-overpass;
+        font-size: tokens.$font-size-lg;
+        font-weight: tokens.$font-weight-overpass-semibold;
+        color: tokens.$color-blue-900;
+        line-height: 1.3;
+        margin: 0;
+
+        @include mixins.breakpoint('desktop') {
+            font-size: tokens.$font-size-h3;
+        }
+    }
+
+    &__title-link {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+            color: tokens.$color-red-500;
+        }
+
+        &:focus-visible {
+            outline: 2px solid tokens.$color-red-500;
+            outline-offset: 2px;
+            border-radius: tokens.$radius-sm;
+        }
+    }
+
+    &__excerpt {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-base;
+        font-weight: tokens.$font-weight-ubuntu-regular;
+        color: tokens.$color-gray-600;
+        line-height: 1.75;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        flex: 1;
+    }
+
+    &__author {
+        display: flex;
+        align-items: center;
+        gap: tokens.$spacing-sm;
+        margin-top: auto;
+        padding-top: tokens.$spacing-md;
+        border-top: 1px solid tokens.$color-gray-200;
+    }
+
+    &__avatar {
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 50%;
+        background: linear-gradient(135deg, tokens.$gradient-intro-orange, tokens.$gradient-intro-red);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: tokens.$font-family-ubuntu;
+        font-size: 0.625rem;
+        font-weight: tokens.$font-weight-ubuntu-bold;
+        color: tokens.$color-white;
+        flex-shrink: 0;
+        text-transform: uppercase;
+    }
+
+    &__author-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
+        flex: 1;
+    }
+
+    &__author-name {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-sm;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        color: tokens.$color-gray-600;
+    }
+
+    &__date {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-sm;
+        color: tokens.$color-gray-600;
+        opacity: 0.7;
+    }
+
+    &__arrow {
+        display: flex;
+        align-items: center;
+        color: tokens.$color-red-500;
+        text-decoration: none;
+        flex-shrink: 0;
+        @include mixins.smooth-transition(opacity);
+
+        .material-symbols-outlined { font-size: 1.25rem; }
+
+        &:hover { opacity: 0.7; }
+
+        &:focus-visible {
+            outline: 2px solid tokens.$color-red-500;
+            outline-offset: 2px;
+            border-radius: tokens.$radius-sm;
+        }
+    }
+}

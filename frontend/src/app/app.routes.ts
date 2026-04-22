@@ -17,6 +17,16 @@ export const routes: Routes = [
             import('./pages/auth/signup/signup').then(m => m.Signup)
     },
     {
+        path: 'blogs',
+        loadComponent: () =>
+            import('./pages/blogs/blogs').then(m => m.Blogs)
+    },
+    {
+        path: 'blogs/:id',
+        loadComponent: () =>
+            import('./pages/blog-detail/blog-detail').then(m => m.BlogDetail)
+    },
+    {
         path: '**',
         redirectTo: ''
     }

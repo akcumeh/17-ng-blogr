@@ -1,14 +1,12 @@
 import { Component, ChangeDetectionStrategy, input, output, signal } from '@angular/core';
 import { ButtonComponent } from '../button/button';
+import { NavItem } from '../dropdown/dropdown';
+
+export type { NavItem };
 
 export interface NavGroup {
     label: string;
     items: NavItem[];
-}
-
-export interface NavItem {
-    label: string;
-    href: string;
 }
 
 @Component({

@@ -4,7 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ButtonComponent } from '../../../shared/ui/button/button';
 import { SuccessModal } from '../../../shared/ui/success-modal/success-modal';
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthService } from '../../../core/services/auth';
 
 @Component({
     selector: 'app-signup',

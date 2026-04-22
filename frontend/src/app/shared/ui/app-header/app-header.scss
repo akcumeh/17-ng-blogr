@@ -1,0 +1,104 @@
+@use '../../../../styles/tokens';
+@use '../../../../styles/mixins';
+
+.header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: tokens.$z-index-header;
+    padding: tokens.$spacing-xl tokens.$spacing-lg;
+    @include mixins.gradient-body;
+
+    @include mixins.breakpoint('tablet') {
+        padding: tokens.$spacing-xl tokens.$spacing-2xl;
+    }
+
+    @include mixins.breakpoint('desktop') {
+        padding: tokens.$spacing-2xl tokens.$spacing-xl;
+    }
+
+    &--transparent {
+        @include mixins.gradient-intro;
+    }
+
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: tokens.$spacing-lg;
+        max-width: 75rem;
+        margin-inline: auto;
+
+        @include mixins.breakpoint('desktop') {
+            gap: tokens.$spacing-2xl;
+        }
+    }
+
+    &__logo {
+        display: flex;
+        align-items: center;
+
+        img {
+            height: 2rem;
+            width: auto;
+
+            @include mixins.breakpoint('desktop') {
+                height: 2.5rem;
+            }
+        }
+    }
+
+    &__hamburger {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: tokens.$spacing-sm;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 2rem;
+            height: auto;
+        }
+
+        &:focus-visible {
+            outline: 2px solid tokens.$color-white;
+            outline-offset: 2px;
+            border-radius: tokens.$radius-sm;
+        }
+    }
+
+    &__nav {
+        display: flex;
+        align-items: center;
+        gap: tokens.$spacing-lg;
+        flex: 1;
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: tokens.$spacing-lg;
+    }
+
+    &__welcome {
+        font-family: tokens.$font-family-ubuntu;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        font-size: tokens.$font-size-base;
+        color: tokens.$color-white;
+    }
+}
+
+.hidden-mobile {
+    @media (max-width: calc(tokens.$breakpoint-tablet - 0.0625rem)) {
+        display: none !important;
+    }
+}
+
+.hidden-desktop {
+    @include mixins.breakpoint('tablet') {
+        display: none !important;
+    }
+}

@@ -1,31 +1,44 @@
-import { Component, ChangeDetectionStrategy, signal, viewChildren, computed, inject } from '@angular/core';
+import {
+    Component,
+    ChangeDetectionStrategy,
+    signal,
+    viewChild,
+    ElementRef,
+    AfterViewInit,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ButtonComponent } from '../../shared/ui/button/button';
-import { DropdownComponent } from '../../shared/ui/dropdown/dropdown';
-import { MobileMenu, NavGroup } from '../../shared/ui/mobile-menu/mobile-menu';
+import { AppHeader } from '../../shared/ui/app-header/app-header';
+import { AppFooter } from '../../shared/ui/app-footer/app-footer';
 import { Features } from '../features/features';
-import { AuthService } from '../../core/services/auth.service';
+import { NavGroup } from '../../shared/ui/mobile-menu/mobile-menu';
+
 
 @Component({
     selector: 'app-landing',
-    imports: [RouterLink, ButtonComponent, DropdownComponent, MobileMenu, Features],
+    imports: [RouterLink, ButtonComponent, AppHeader, AppFooter, Features],
     templateUrl: './landing.html',
     styleUrl: './landing.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '(window:scroll)': 'onScroll()'
+    }
 })
-export class Landing {
-    private authService = inject(AuthService);
 
-    protected isMobileMenuOpen = signal(false);
-    private dropdowns = viewChildren(DropdownComponent);
-    protected currentUser = this.authService.currentUser;
-    protected isAuthenticated = computed(() => !!this.currentUser());
+export class Landing implements AfterViewInit {
+    protected isNavTransparent = signal(true);
+
+    private featuresSectionRef = viewChild.required<ElementRef>('featuresSection');
 
     protected navGroups: NavGroup[] = [
         {
             label: 'Product',
             items: [
-                { label: 'Overview', href: '#' },
+                {
+                    label: 'Overview',
+                    href: '/',
+                    click: () => this.scrollToFeatures()
+                },
                 { label: 'Pricing', href: '#' },
                 { label: 'Marketplace', href: '#' },
                 { label: 'Features', href: '#' },
@@ -37,7 +50,7 @@ export class Landing {
             items: [
                 { label: 'About', href: '#' },
                 { label: 'Team', href: '#' },
-                { label: 'Blog', href: '#' },
+                { label: 'Blogs', href: '/blogs' },
                 { label: 'Careers', href: '#' }
             ]
         },
@@ -51,30 +64,28 @@ export class Landing {
         }
     ];
 
-    protected toggleMobileMenu(): void {
-        this.isMobileMenuOpen.update(value => !value);
+    ngAfterViewInit(): void {
+        this.onScroll();
     }
 
-    protected closeMobileMenu(): void {
-        this.isMobileMenuOpen.set(false);
+    protected onScroll(): void {
+        const headerEl = document.querySelector<HTMLElement>('.header');
+        const featuresSection = this.featuresSectionRef().nativeElement as HTMLElement;
+
+        const navbarHeight = headerEl?.getBoundingClientRect().height ?? 0;
+        const featuresSectionTop = featuresSection.getBoundingClientRect().top + window.scrollY;
+        const threshold = featuresSectionTop - navbarHeight;
+
+        this.isNavTransparent.set(window.scrollY < threshold);
     }
 
     protected scrollToFeatures(): void {
-        const featuresSection = document.querySelector('app-features');
-        if (featuresSection) {
-            featuresSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    }
+        const headerEl = document.querySelector<HTMLElement>('.header');
+        const featuresSection = this.featuresSectionRef().nativeElement as HTMLElement;
 
-    protected onDropdownOpened(openedLabel: string): void {
-        this.dropdowns().forEach(dropdown => {
-            if (dropdown.label() !== openedLabel) {
-                dropdown.close();
-            }
-        });
-    }
+        const navbarHeight = headerEl?.getBoundingClientRect().height ?? 0;
+        const featuresSectionTop = featuresSection.getBoundingClientRect().top + window.scrollY;
 
-    protected logout(): void {
-        this.authService.logout();
+        window.scrollTo({ top: featuresSectionTop - navbarHeight, behavior: 'smooth' });
     }
 }

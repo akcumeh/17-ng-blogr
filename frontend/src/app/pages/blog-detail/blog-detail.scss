@@ -1,0 +1,257 @@
+@use '../../../styles/tokens';
+@use '../../../styles/mixins';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    background: tokens.$color-white;
+    min-height: 100vh;
+}
+
+.blog-detail {
+    flex: 1;
+
+    &__hero {
+        position: relative;
+        @include mixins.gradient-intro;
+        border-bottom-left-radius: tokens.$radius-xl;
+        padding: tokens.$spacing-4xl tokens.$spacing-lg tokens.$spacing-3xl;
+        overflow: hidden;
+
+        @include mixins.breakpoint('tablet') {
+            padding: tokens.$spacing-4xl tokens.$spacing-2xl tokens.$spacing-3xl;
+        }
+
+        @include mixins.breakpoint('desktop') {
+            padding: tokens.$spacing-4xl tokens.$spacing-xl tokens.$spacing-4xl;
+            border-bottom-left-radius: 6.25rem;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('/assets/images/bg-pattern-intro-mobile.svg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: 0;
+
+            @include mixins.breakpoint('desktop') {
+                background-image: url('/assets/images/bg-pattern-intro-desktop.svg');
+            }
+        }
+
+        &--skeleton,
+        &--error {
+            display: flex;
+            align-items: center;
+            min-height: 16rem;
+        }
+    }
+
+    &__hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 50rem;
+        margin-inline: auto;
+        animation: page-enter 500ms ease both;
+
+        @include mixins.breakpoint('desktop') {
+            max-width: 75rem;
+            padding-inline: 0;
+        }
+    }
+
+    &__back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: tokens.$spacing-xs;
+
+        .material-symbols-outlined {
+            font-size: 1.125rem;
+            user-select: none;
+        }
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-base;
+        font-weight: tokens.$font-weight-ubuntu-regular;
+        color: tokens.$color-white;
+        text-decoration: none;
+        margin-bottom: tokens.$spacing-xl;
+        @include mixins.smooth-transition(color opacity);
+
+        &:hover {
+            color: tokens.$color-white;
+        }
+
+        &:focus-visible {
+            outline: 2px solid tokens.$color-white;
+            outline-offset: 3px;
+            border-radius: tokens.$radius-sm;
+        }
+    }
+
+    &__title {
+        font-family: tokens.$font-family-overpass;
+        font-size: tokens.$font-size-h1-mobile;
+        font-weight: tokens.$font-weight-overpass-semibold;
+        color: tokens.$color-white;
+        line-height: 1.1;
+        margin-bottom: tokens.$spacing-xl;
+
+        @include mixins.breakpoint('desktop') {
+            font-size: tokens.$font-size-h1;
+            max-width: 42rem;
+        }
+    }
+
+    &__meta {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: tokens.$spacing-sm;
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    &__avatar {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: tokens.$font-family-ubuntu;
+        font-size: 0.625rem;
+        font-weight: tokens.$font-weight-ubuntu-bold;
+        color: tokens.$color-white;
+        flex-shrink: 0;
+        text-transform: uppercase;
+    }
+
+    &__author-name {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-base;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        color: tokens.$color-white;
+    }
+
+    &__meta-sep {
+        opacity: 0.5;
+    }
+
+    &__date {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-sm;
+    }
+
+    &__clock-icon {
+        width: 0.875rem;
+        height: 0.875rem;
+    }
+
+    &__reading-time {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-sm;
+    }
+
+    &__status {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-lg;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    &__error-message {
+        font-family: tokens.$font-family-overpass;
+        font-size: tokens.$font-size-h3;
+        font-weight: tokens.$font-weight-overpass-semibold;
+        color: tokens.$color-white;
+        margin-bottom: tokens.$spacing-lg;
+    }
+
+    &__article {
+        max-width: 48rem;
+        margin-inline: auto;
+        padding: tokens.$spacing-3xl tokens.$spacing-lg tokens.$spacing-5xl;
+
+        @include mixins.breakpoint('tablet') {
+            padding: tokens.$spacing-4xl tokens.$spacing-lg tokens.$spacing-5xl;
+        }
+
+        @include mixins.breakpoint('desktop') {
+            max-width: 75rem;
+            padding: tokens.$spacing-4xl 0 tokens.$spacing-5xl;
+        }
+    }
+
+    &__body {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-base;
+        font-weight: tokens.$font-weight-ubuntu-regular;
+        color: tokens.$color-gray-600;
+        line-height: 1.85;
+
+        & > p {
+            margin-bottom: tokens.$spacing-lg;
+        }
+
+        @include mixins.breakpoint('desktop') {
+            max-width: 48rem;
+        }
+    }
+
+    &__author-card-wrapper {
+        @include mixins.breakpoint('desktop') {
+            max-width: 48rem;
+        }
+    }
+
+
+    &__author-card {
+        display: flex;
+        align-items: flex-start;
+        gap: tokens.$spacing-lg;
+        background: tokens.$color-gray-100;
+        border-radius: tokens.$radius-lg;
+        padding: tokens.$spacing-xl;
+        margin-top: tokens.$spacing-4xl;
+    }
+
+    &__author-avatar {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 50%;
+        background: linear-gradient(135deg, tokens.$gradient-intro-orange, tokens.$gradient-intro-red);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-sm;
+        font-weight: tokens.$font-weight-ubuntu-bold;
+        color: tokens.$color-white;
+        flex-shrink: 0;
+        text-transform: uppercase;
+    }
+
+    &__author-info {
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-sm;
+    }
+
+    &__author-heading {
+        font-family: tokens.$font-family-overpass;
+        font-size: tokens.$font-size-base;
+        font-weight: tokens.$font-weight-overpass-semibold;
+        color: tokens.$color-blue-900;
+    }
+
+    &__author-bio {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-sm;
+        font-weight: tokens.$font-weight-ubuntu-regular;
+        color: tokens.$color-gray-600;
+        line-height: 1.7;
+    }
+}

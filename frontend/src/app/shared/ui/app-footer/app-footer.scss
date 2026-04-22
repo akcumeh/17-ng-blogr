@@ -1,0 +1,116 @@
+@use '../../../../styles/tokens';
+@use '../../../../styles/mixins';
+
+.footer {
+    background: tokens.$color-gray-900;
+    border-top-right-radius: tokens.$radius-xl;
+    padding: tokens.$spacing-4xl tokens.$spacing-md tokens.$spacing-2xl;
+
+    @include mixins.breakpoint('desktop') {
+        border-top-right-radius: 6.25rem;
+        padding: tokens.$spacing-4xl tokens.$spacing-xl;
+    }
+
+    &__container {
+        max-width: 75rem;
+        margin-inline: auto;
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-3xl;
+        text-align: center;
+
+        @include mixins.breakpoint('tablet') {
+            flex-direction: row;
+            justify-content: space-between;
+            text-align: left;
+            gap: tokens.$spacing-2xl;
+        }
+
+        @include mixins.breakpoint('desktop') {
+            gap: tokens.$spacing-4xl;
+        }
+    }
+
+    &__brand {
+        display: flex;
+        justify-content: center;
+
+        @include mixins.breakpoint('tablet') {
+            justify-content: flex-start;
+        }
+    }
+
+    &__logo {
+        height: 2.5rem;
+        width: auto;
+    }
+
+    &__nav {
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-2xl;
+
+        @include mixins.breakpoint('tablet') {
+            flex-direction: row;
+            gap: tokens.$spacing-2xl;
+        }
+
+        @include mixins.breakpoint('desktop') {
+            gap: tokens.$spacing-4xl;
+        }
+    }
+
+    &__column {
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-lg;
+    }
+
+    &__heading {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-base;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        color: tokens.$color-white;
+    }
+
+    &__list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: tokens.$spacing-sm;
+    }
+
+    &__copyright {
+        font-family: tokens.$font-family-overpass;
+        font-size: tokens.$font-size-sm;
+        color: rgba(255, 255, 255, 0.4);
+        text-align: center;
+        margin-top: tokens.$spacing-3xl;
+
+        @include mixins.breakpoint('tablet') {
+            text-align: left;
+        }
+    }
+
+    &__link {
+        font-family: tokens.$font-family-ubuntu;
+        font-size: tokens.$font-size-base;
+        font-weight: tokens.$font-weight-ubuntu-regular;
+        color: tokens.$color-white;
+        text-decoration: none;
+        opacity: 0.75;
+        @include mixins.smooth-transition();
+
+        &:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        &:focus-visible {
+            outline: 2px solid tokens.$color-white;
+            outline-offset: 2px;
+            border-radius: tokens.$radius-sm;
+            opacity: 1;
+        }
+    }
+}

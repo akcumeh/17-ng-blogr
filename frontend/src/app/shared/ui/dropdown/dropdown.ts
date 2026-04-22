@@ -1,8 +1,9 @@
 import { Component, ChangeDetectionStrategy, input, signal, output } from '@angular/core';
 
-interface NavItem {
+export interface NavItem {
     label: string;
     href: string;
+    click?: () => void;
 }
 
 @Component({
@@ -32,6 +33,14 @@ export class DropdownComponent {
 
     public close(): void {
         if (this.isOpen() && !this.isClosing()) {
+            this.startClosing();
+        }
+    }
+
+    protected handleItemClick(item: NavItem, event: Event): void {
+        if (item.click) {
+            event.preventDefault();
+            item.click();
             this.startClosing();
         }
     }

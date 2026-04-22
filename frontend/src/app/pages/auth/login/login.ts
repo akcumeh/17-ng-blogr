@@ -5,7 +5,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs';
 import { ButtonComponent } from '../../../shared/ui/button/button';
 import { SuccessModal } from '../../../shared/ui/success-modal/success-modal';
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthService } from '../../../core/services/auth';
 
 @Component({
     selector: 'app-login',
@@ -71,8 +71,11 @@ export class Login {
             },
             error: (err: HttpErrorResponse) => {
                 this.isSubmitting.set(false);
+                const isClientError = err.status >= 400 && err.status < 500;
                 this.generalError.set(
-                    err.error?.error ?? 'Wrong email address or password. Are you sure you have an account?'
+                    isClientError
+                        ? (err.error?.error ?? 'Wrong email address or password.')
+                        : 'Something went wrong. Please try again later.'
                 );
             }
         });
