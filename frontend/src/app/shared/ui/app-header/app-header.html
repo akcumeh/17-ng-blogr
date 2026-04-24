@@ -29,14 +29,10 @@
         <div class="header__actions hidden-mobile">
             @if (isAuthenticated()) {
                 <span class="header__welcome">Welcome {{ currentUser()?.firstName }}</span>
-                <app-button variant="ghost" size="md" (click)="logout()">Logout</app-button>
+                <app-button variant="ghost" size="md" (clicked)="logout()">Logout</app-button>
             } @else {
-                <a routerLink="/login">
-                    <app-button variant="ghost" size="md">Login</app-button>
-                </a>
-                <a routerLink="/signup">
-                    <app-button variant="secondary" size="md">Sign Up</app-button>
-                </a>
+                <app-button variant="ghost" size="md" (clicked)="navigateTo('/login')">Login</app-button>
+                <app-button variant="secondary" size="md" (clicked)="navigateTo('/signup')">Sign Up</app-button>
             }
         </div>
     </div>

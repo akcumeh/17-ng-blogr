@@ -3,6 +3,7 @@ import { Component, ChangeDetectionStrategy, input, signal, output } from '@angu
 export interface NavItem {
     label: string;
     href: string;
+    external?: boolean;
     click?: () => void;
 }
 

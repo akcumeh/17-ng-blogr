@@ -10,7 +10,7 @@
                     <h4 class="footer__heading">{{ group.label }}</h4>
                     <ul class="footer__list">
                         @for (item of group.items; track item.label) {
-                            <li><a [href]="item.href" class="footer__link">{{ item.label }}</a></li>
+                            <li><a [href]="item.href" class="footer__link" [attr.target]="item.external ? '_blank' : null" [attr.rel]="item.external ? 'noopener noreferrer' : null">{{ item.label }}</a></li>
                         }
                     </ul>
                 </div>

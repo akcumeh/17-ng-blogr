@@ -29,6 +29,8 @@
                                     [href]="item.href"
                                     class="mobile-menu__item"
                                     (click)="handleClose()"
+                                    [attr.target]="item.external ? '_blank' : null"
+                                    [attr.rel]="item.external ? 'noopener noreferrer' : null"
                                 >
                                     {{ item.label }}
                                 </a>
@@ -39,10 +41,13 @@
             </nav>
 
             <div class="mobile-menu__footer">
-                <a href="#" class="mobile-menu__login">Login</a>
-                <app-button variant="filled" size="md">
-                    Sign Up
-                </app-button>
+                @if (isAuthenticated()) {
+                    <span class="mobile-menu__welcome">Welcome {{ currentUser()?.firstName }}</span>
+                    <app-button variant="filled" size="md" (clicked)="logout()">Logout</app-button>
+                } @else {
+                    <button class="mobile-menu__login" (click)="navigateTo('/login')">Login</button>
+                    <app-button variant="filled" size="md" (clicked)="navigateTo('/signup')">Sign Up</app-button>
+                }
             </div>
         </div>
     </div>

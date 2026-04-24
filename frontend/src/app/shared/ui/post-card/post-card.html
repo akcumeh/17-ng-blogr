@@ -18,17 +18,16 @@
     <p class="post-card__excerpt">{{ post().description }}</p>
 
     <footer class="post-card__author">
-        <div class="post-card__avatar" aria-hidden="true">
-            {{ post().author.first_name.charAt(0) }}{{ post().author.last_name.charAt(0) }}
-        </div>
-        <div class="post-card__author-info">
-            <span class="post-card__author-name">
-                {{ post().author.first_name }} {{ post().author.last_name }}
-            </span>
-            <span class="post-card__date">{{ post().createdAt | date:'MMM dd, y' }}</span>
-        </div>
-        <a [routerLink]="['/blogs', post()._id]" class="post-card__arrow" aria-label="Read {{ post().title }}">
-            <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+        <a [routerLink]="['/blogs']" class="post-card__author-link" aria-label="View author profile">
+            <div class="post-card__avatar" aria-hidden="true">
+                {{ post().author.first_name.charAt(0) }}{{ post().author.last_name.charAt(0) }}
+            </div>
+            <div class="post-card__author-info">
+                <span class="post-card__author-name">
+                    {{ post().author.first_name }} {{ post().author.last_name }}
+                </span>
+                <span class="post-card__date">{{ post().createdAt | date:'MMM dd, y' }}</span>
+            </div>
         </a>
     </footer>
 </article>

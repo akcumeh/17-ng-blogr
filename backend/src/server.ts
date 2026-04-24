@@ -9,6 +9,10 @@ const app = express();
 
 connectDB();
 
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+});
+
 app.use(cors({
     origin: process.env.CLIENT_ORIGIN || 'http://localhost:4200'
 }));

@@ -14,9 +14,9 @@
     }
 
     &__heading {
-        font-family: tokens.$font-family-ubuntu;
+        font-family: tokens.$font-family-overpass;
         font-size: tokens.$font-size-h2;
-        font-weight: tokens.$font-weight-ubuntu-medium;
+        font-weight: tokens.$font-weight-overpass-semibold;
         color: tokens.$color-blue-900;
         text-align: center;
         margin-bottom: tokens.$spacing-3xl;
@@ -60,16 +60,16 @@
     }
 
     &__title {
-        font-family: tokens.$font-family-ubuntu;
+        font-family: tokens.$font-family-overpass;
         font-size: tokens.$font-size-h3;
-        font-weight: tokens.$font-weight-ubuntu-medium;
+        font-weight: tokens.$font-weight-overpass-semibold;
         color: tokens.$color-blue-900;
     }
 
     &__text {
-        font-family: tokens.$font-family-overpass;
+        font-family: tokens.$font-family-ubuntu;
         font-size: tokens.$font-size-base;
-        font-weight: tokens.$font-weight-overpass-light;
+        font-weight: tokens.$font-weight-ubuntu-regular;
         color: tokens.$color-gray-600;
         line-height: 1.75;
     }
@@ -214,16 +214,16 @@
     }
 
     &__heading {
-        font-family: tokens.$font-family-ubuntu;
+        font-family: tokens.$font-family-overpass;
         font-size: tokens.$font-size-h2;
-        font-weight: tokens.$font-weight-ubuntu-medium;
+        font-weight: tokens.$font-weight-overpass-semibold;
         color: tokens.$color-white;
     }
 
     &__text {
-        font-family: tokens.$font-family-overpass;
+        font-family: tokens.$font-family-ubuntu;
         font-size: tokens.$font-size-base;
-        font-weight: tokens.$font-weight-overpass-light;
+        font-weight: tokens.$font-weight-ubuntu-regular;
         color: tokens.$color-white;
         line-height: 1.75;
         opacity: 0.9;
@@ -276,16 +276,16 @@
     }
 
     &__title {
-        font-family: tokens.$font-family-ubuntu;
+        font-family: tokens.$font-family-overpass;
         font-size: tokens.$font-size-h3;
-        font-weight: tokens.$font-weight-ubuntu-medium;
+        font-weight: tokens.$font-weight-overpass-semibold;
         color: tokens.$color-blue-900;
     }
 
     &__text {
-        font-family: tokens.$font-family-overpass;
+        font-family: tokens.$font-family-ubuntu;
         font-size: tokens.$font-size-base;
-        font-weight: tokens.$font-weight-overpass-light;
+        font-weight: tokens.$font-weight-ubuntu-regular;
         color: tokens.$color-gray-600;
         line-height: 1.75;
     }
