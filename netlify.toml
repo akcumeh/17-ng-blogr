@@ -1,0 +1,4 @@
+[build]
+  base    = "frontend"
+  command = "echo \"export const environment = { production: true, apiUrl: '$API_URL' };\" > src/environments/environment.prod.ts && npm run build"
+  publish = "dist/blogr-frontend/browser"
