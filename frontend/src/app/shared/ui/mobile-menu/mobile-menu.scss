@@ -28,6 +28,8 @@
         margin-top: 5rem;
         box-shadow: 0 1.25rem 2.5rem hsla(0, 0%, 0%, 0.15);
         animation: mobile-menu-enter 500ms ease;
+        max-height: calc(100vh - 7rem);
+        overflow-y: auto;
     }
 
     &__nav {
@@ -125,12 +127,23 @@
         gap: tokens.$spacing-lg;
     }
 
+    &__welcome {
+        font-family: tokens.$font-family-ubuntu;
+        font-weight: tokens.$font-weight-ubuntu-medium;
+        font-size: tokens.$font-size-lg;
+        color: tokens.$color-blue-900;
+    }
+
     &__login {
         font-family: tokens.$font-family-ubuntu;
         font-weight: tokens.$font-weight-ubuntu-medium;
         font-size: tokens.$font-size-lg;
         color: tokens.$color-blue-900;
         text-decoration: none;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
         @include mixins.smooth-transition();
 
         &:hover {

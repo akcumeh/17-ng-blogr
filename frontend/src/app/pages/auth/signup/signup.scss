@@ -33,18 +33,22 @@
     }
 
     &__title {
-        font-family: tokens.$font-family-ubuntu;
-        font-size: tokens.$font-size-h3;
-        font-weight: tokens.$font-weight-ubuntu-bold;
+        font-family: tokens.$font-family-overpass;
+        font-size: tokens.$font-size-lg;
+        font-weight: tokens.$font-weight-overpass-semibold;
         color: tokens.$color-blue-900;
         text-align: center;
         margin-bottom: tokens.$spacing-sm;
+
+        @include mixins.breakpoint('desktop') {
+            font-size: tokens.$font-size-h3;
+        }
     }
 
     &__subtitle {
-        font-family: tokens.$font-family-overpass;
+        font-family: tokens.$font-family-ubuntu;
         font-size: tokens.$font-size-base;
-        font-weight: tokens.$font-weight-overpass-light;
+        font-weight: tokens.$font-weight-ubuntu-regular;
         color: tokens.$color-gray-600;
         text-align: center;
         margin-bottom: tokens.$spacing-2xl;
@@ -52,9 +56,9 @@
 
     &__footer {
         margin-top: tokens.$spacing-xl;
-        font-family: tokens.$font-family-overpass;
+        font-family: tokens.$font-family-ubuntu;
         font-size: tokens.$font-size-base;
-        font-weight: tokens.$font-weight-overpass-light;
+        font-weight: tokens.$font-weight-ubuntu-regular;
         color: tokens.$color-gray-600;
         text-align: center;
     }
@@ -114,8 +118,12 @@
     font-family: tokens.$font-family-overpass;
     font-size: tokens.$font-size-base;
     color: tokens.$color-blue-900;
-    padding: tokens.$spacing-md;
+    padding: tokens.$spacing-sm tokens.$spacing-md;
     border: 1px solid tokens.$color-gray-200;
+
+    @include mixins.breakpoint('desktop') {
+        padding: tokens.$spacing-md;
+    }
     border-radius: tokens.$radius-md;
     @include mixins.smooth-transition(border-color);
 

@@ -50,28 +50,25 @@ export class Blogs implements OnInit {
         {
             label: 'Product',
             items: [
-                { label: 'Overview', href: '/' },
-                { label: 'Pricing', href: '#' },
-                { label: 'Marketplace', href: '#' },
-                { label: 'Features', href: '#' },
-                { label: 'Integrations', href: '#' },
+                { label: 'Blogs', href: '/blogs' },
+                { label: 'View on GitHub', href: 'https://github.com/akcumeh/17-ng-blogr', external: true },
+                { label: 'Features', href: '/' },
             ],
         },
         {
             label: 'Company',
             items: [
-                { label: 'About', href: '#' },
-                { label: 'Team', href: '#' },
-                { label: 'Blogs', href: '/blogs' },
-                { label: 'Careers', href: '#' },
+                { label: 'About', href: '/' },
+                { label: 'Team', href: 'https://angelumeh.dev', external: true },
             ],
         },
         {
             label: 'Connect',
             items: [
-                { label: 'Contact', href: '#' },
-                { label: 'Newsletter', href: '#' },
-                { label: 'LinkedIn', href: 'https://linkedin.com/in/angelumeh' },
+                { label: 'Contact', href: 'mailto:akcumeh@gmail.com' },
+                { label: 'GitHub', href: 'https://github.com/akcumeh', external: true },
+                { label: 'Twitter / X', href: 'https://twitter.com/akcumeh', external: true },
+                { label: 'LinkedIn', href: 'https://linkedin.com/in/angelumeh', external: true },
             ],
         },
     ];

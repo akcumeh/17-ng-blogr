@@ -34,32 +34,28 @@ export class Landing implements AfterViewInit {
         {
             label: 'Product',
             items: [
-                {
-                    label: 'Overview',
-                    href: '/',
-                    click: () => this.scrollToFeatures()
-                },
-                { label: 'Pricing', href: '#' },
-                { label: 'Marketplace', href: '#' },
-                { label: 'Features', href: '#' },
-                { label: 'Integrations', href: '#' }
+                { label: 'Overview', href: '/blogs' },
+                { label: 'Pricing', href: '/blogs' },
+                { label: 'Marketplace', href: '/blogs' },
+                { label: 'Features', href: '/blogs' },
+                { label: 'Integrations', href: '/blogs' }
             ]
         },
         {
             label: 'Company',
             items: [
-                { label: 'About', href: '#' },
-                { label: 'Team', href: '#' },
+                { label: 'About', href: '/blogs' },
+                { label: 'Team', href: '/blogs' },
                 { label: 'Blogs', href: '/blogs' },
-                { label: 'Careers', href: '#' }
+                { label: 'Careers', href: '/blogs' }
             ]
         },
         {
             label: 'Connect',
             items: [
-                { label: 'Contact', href: '#' },
-                { label: 'Newsletter', href: '#' },
-                { label: 'LinkedIn', href: 'https://linkedin.com/in/angelumeh' }
+                { label: 'Contact', href: '/blogs' },
+                { label: 'Newsletter', href: '/blogs' },
+                { label: 'LinkedIn', href: 'https://linkedin.com/in/angelumeh', external: true }
             ]
         }
     ];
@@ -80,12 +76,6 @@ export class Landing implements AfterViewInit {
     }
 
     protected scrollToFeatures(): void {
-        const headerEl = document.querySelector<HTMLElement>('.header');
-        const featuresSection = this.featuresSectionRef().nativeElement as HTMLElement;
-
-        const navbarHeight = headerEl?.getBoundingClientRect().height ?? 0;
-        const featuresSectionTop = featuresSection.getBoundingClientRect().top + window.scrollY;
-
-        window.scrollTo({ top: featuresSectionTop - navbarHeight, behavior: 'smooth' });
+        this.featuresSectionRef().nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }

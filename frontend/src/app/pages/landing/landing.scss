@@ -163,9 +163,9 @@
     }
 
     &__title {
-        font-family: tokens.$font-family-ubuntu;
+        font-family: tokens.$font-family-overpass;
         font-size: tokens.$font-size-h1-mobile;
-        font-weight: tokens.$font-weight-ubuntu-medium;
+        font-weight: tokens.$font-weight-overpass-semibold;
         line-height: 1.1;
         color: tokens.$color-white;
         margin-bottom: tokens.$spacing-md;
@@ -177,9 +177,9 @@
     }
 
     &__subtitle {
-        font-family: tokens.$font-family-overpass;
+        font-family: tokens.$font-family-ubuntu;
         font-size: tokens.$font-size-lg;
-        font-weight: tokens.$font-weight-overpass-light;
+        font-weight: tokens.$font-weight-ubuntu-regular;
         color: tokens.$color-white;
         margin-bottom: tokens.$spacing-xl;
         opacity: 0.9;
@@ -204,6 +204,10 @@
     border-top-right-radius: tokens.$radius-xl;
     padding: tokens.$spacing-4xl tokens.$spacing-md tokens.$spacing-2xl;
     margin-top: tokens.$spacing-5xl;
+
+    @include mixins.breakpoint('tablet') {
+        padding: tokens.$spacing-4xl tokens.$spacing-3xl tokens.$spacing-2xl;
+    }
 
     @include mixins.breakpoint('desktop') {
         border-top-right-radius: 6.25rem;
@@ -266,9 +270,9 @@
     }
 
     &__heading {
-        font-family: tokens.$font-family-ubuntu;
+        font-family: tokens.$font-family-overpass;
         font-size: tokens.$font-size-base;
-        font-weight: tokens.$font-weight-ubuntu-medium;
+        font-weight: tokens.$font-weight-overpass-semibold;
         color: tokens.$color-white;
     }
 

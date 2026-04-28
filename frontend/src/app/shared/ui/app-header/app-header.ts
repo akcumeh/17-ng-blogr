@@ -7,7 +7,7 @@ import {
     viewChildren,
     inject,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { ButtonComponent } from '../button/button';
 import { DropdownComponent } from '../dropdown/dropdown';
 import { MobileMenu, NavGroup } from '../mobile-menu/mobile-menu';
@@ -17,13 +17,14 @@ export type { NavGroup };
 
 @Component({
     selector: 'app-header',
-    imports: [RouterLink, ButtonComponent, DropdownComponent, MobileMenu],
+    imports: [ButtonComponent, DropdownComponent, MobileMenu],
     templateUrl: './app-header.html',
     styleUrl: './app-header.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppHeader {
     private readonly authService = inject(AuthService);
+    private readonly router = inject(Router);
 
     navGroups = input.required<NavGroup[]>();
     transparent = input<boolean>(false);
@@ -48,6 +49,10 @@ export class AppHeader {
                 dropdown.close();
             }
         });
+    }
+
+    protected navigateTo(path: string): void {
+        this.router.navigate([path]);
     }
 
     protected logout(): void {
