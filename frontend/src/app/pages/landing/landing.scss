@@ -108,13 +108,13 @@
 
 .hidden-mobile {
     @media (max-width: calc(tokens.$breakpoint-tablet - 0.0625rem)) {
-        display: none !important;
+        display: none;
     }
 }
 
 .hidden-desktop {
     @include mixins.breakpoint('tablet') {
-        display: none !important;
+        display: none;
     }
 }
 
@@ -136,7 +136,7 @@
 
     @include mixins.breakpoint('desktop') {
         padding: tokens.$spacing-5xl tokens.$spacing-xl tokens.$spacing-4xl;
-        border-bottom-left-radius: 6.25rem;
+        border-bottom-left-radius: tokens.$radius-xl;
     }
 
     &::after {
@@ -210,7 +210,7 @@
     }
 
     @include mixins.breakpoint('desktop') {
-        border-top-right-radius: 6.25rem;
+        border-top-right-radius: tokens.$radius-xl;
         padding: tokens.$spacing-4xl tokens.$spacing-xl;
     }
 

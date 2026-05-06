@@ -33,11 +33,13 @@ export const createBlog = async (req: Request, res: Response): Promise<void> => 
                 res.status(400).json({ error: 'Posts must be scheduled for a future time.' });
                 return;
             }
+            await blog.save();
             const job = await postQueue.add({ postId: blog._id }, { delay });
             blog.scheduledJobId = String(job.id);
+            await blog.save();
+        } else {
+            await blog.save();
         }
-
-        await blog.save();
         res.status(201).json(blog);
         return;
     } catch (e) {
@@ -138,11 +140,9 @@ export const deleteBlog = async (req: Request, res: Response): Promise<void> => 
 
 export const getUserBlogs = async (req: Request, res: Response): Promise<void> => {
     try {
-        const {
-            state,
-            page = 1,
-            limit = 20
-        } = req.query;
+        const { state } = req.query;
+        const pageNum = Math.max(1, Number(req.query.page) || 1);
+        const limitNum = Math.min(100, Math.max(1, Number(req.query.limit) || 20));
         const filter: Record<string, any> = { author: req.userId };
 
         if (state) {
@@ -151,15 +151,15 @@ export const getUserBlogs = async (req: Request, res: Response): Promise<void> =
 
         const posts = await Post.find(filter)
             .sort({ createdAt: -1 })
-            .limit((limit as number) * 1)
-            .skip(((page as number) - 1) * (limit as number));
+            .limit(limitNum)
+            .skip((pageNum - 1) * limitNum);
 
         const count = await Post.countDocuments(filter);
 
         res.json({
             posts,
-            totalPages: Math.ceil(count / (limit as number)),
-            currentPage: (page as number)
+            totalPages: Math.ceil(count / limitNum),
+            currentPage: pageNum
         });
     } catch (e) {
         res.status(500).json({ error: (e as Error).message });
@@ -168,15 +168,9 @@ export const getUserBlogs = async (req: Request, res: Response): Promise<void> =
 
 export const getPublishedBlogs = async (req: Request, res: Response): Promise<void> => {
     try {
-        const {
-            page = 1,
-            limit = 20,
-            author,
-            title,
-            tags,
-            orderBy = 'timestamp',
-            order = 'desc'
-        } = req.query;
+        const { author, title, tags, orderBy = 'timestamp', order = 'desc' } = req.query;
+        const pageNum = Math.max(1, Number(req.query.page) || 1);
+        const limitNum = Math.min(100, Math.max(1, Number(req.query.limit) || 20));
 
         const filter: Record<string, any> = { state: 'published' };
 
@@ -197,8 +191,8 @@ export const getPublishedBlogs = async (req: Request, res: Response): Promise<vo
             };
         }
 
-        if (title as string) {
-            filter.title = new RegExp(title as string, 'i');
+        if (title && typeof title === 'string') {
+            filter.title = new RegExp(title, 'i');
         }
 
         if (tags) {
@@ -211,15 +205,15 @@ export const getPublishedBlogs = async (req: Request, res: Response): Promise<vo
         const posts = await Post.find(filter)
             .populate('author', 'first_name last_name email')
             .sort({ [sortField]: sortingOrder })
-            .limit((limit as number) * 1)
-            .skip(((page as number) - 1) * (limit as number));
+            .limit(limitNum)
+            .skip((pageNum - 1) * limitNum);
 
         const count = await Post.countDocuments(filter);
 
         res.json({
             posts,
-            totalPages: Math.ceil(count / (limit as number)),
-            currentPage: (page as number)
+            totalPages: Math.ceil(count / limitNum),
+            currentPage: pageNum
         });
     } catch (e) {
         res.status(500).json({ error: (e as Error).message });
