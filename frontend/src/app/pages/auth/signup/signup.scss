@@ -131,7 +131,7 @@
         border-color: tokens.$color-gray-600;
     }
 
-    &:focus {
+    &:focus-visible {
         outline: none;
         border-color: tokens.$color-red-500;
         box-shadow: 0 0 0 3px rgba(hsl(356, 100%, 66%), 0.1);
@@ -146,7 +146,7 @@
     &--error {
         border-color: tokens.$color-red-500;
 
-        &:focus {
+        &:focus-visible {
             box-shadow: 0 0 0 3px rgba(hsl(356, 100%, 66%), 0.2);
         }
     }

@@ -2,7 +2,7 @@
     <div class="mobile-menu" role="dialog" aria-modal="true">
         <div class="mobile-menu__overlay" (click)="handleClose()"></div>
 
-        <div class="mobile-menu__content">
+        <div class="mobile-menu__content" cdkTrapFocus cdkTrapFocusAutoCapture="true">
             <nav class="mobile-menu__nav">
                 @for (group of navGroups(); track group.label) {
                     <div class="mobile-menu__group">
